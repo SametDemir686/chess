@@ -27,6 +27,17 @@ public class MatrixUtil {
         return result;
     }
 
+    public static Piece[][] deepCopyBoard(Piece[][] board) {
+        int n = board.length;
+        Piece[][] result = new Piece[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                result[i][j] = board[i][j].copy();
+            }
+        }
+        return result;
+    }
+
     public static <T> void rotateRight(T[][] mat) {
         int n = mat.length;
         for (int x = 0; x < n / 2; x++) {

@@ -1,10 +1,10 @@
 package chess.piece;
 
-import chess.match.Board;
+import chess.match.MatchBoard;
 
 public abstract class Pawn extends AbstractPiece {
-    protected Pawn(Board board) {
-        super(board);
+    protected Pawn(MatchBoard matchBoard) {
+        super(matchBoard);
     }
 
 }

@@ -1,15 +1,15 @@
 package chess.piece;
 
 import chess.match.A1Notation;
-import chess.match.Board;
 import chess.match.Direction;
+import chess.match.MatchBoard;
 
 import static java.lang.Math.abs;
 
 public abstract class Knight extends AbstractPiece {
 
-    protected Knight(Board board) {
-        super(board);
+    protected Knight(MatchBoard matchBoard) {
+        super(matchBoard);
     }
 
     @Override

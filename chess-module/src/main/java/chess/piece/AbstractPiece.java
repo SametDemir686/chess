@@ -10,7 +10,7 @@ import static chess.util.Util.findDirection;
 import static chess.util.Util.parseToUnaryOperator;
 
 public abstract class AbstractPiece implements Piece {
-    protected final Board board;
+    protected Board board;
     protected A1Notation position;
     private boolean active = true;
     private boolean moved = false;
@@ -31,43 +31,19 @@ public abstract class AbstractPiece implements Piece {
 
     @Override
     public boolean canMoveTo(A1Notation newPosition) {
-        return !isPinned()
+        return !isPinned(newPosition)
                 && isNotOccupiedByAllyPiece(newPosition);
     }
 
-    public boolean isPinned() {
+    public boolean isPinned(A1Notation newPosition) {
         Direction directionToTheKing = findDirectionToTheKing();
         if (!directionToTheKing.isValid()) return false;
-        return isThereNoPieceBetweenKingAndThisPiece(directionToTheKing)
-                && isDirectionThreatened(directionToTheKing);
+        return board.willThereBeCheckIfMoves(this.position, newPosition);
     }
 
     private Direction findDirectionToTheKing() {
         A1Notation kingsPosition = board.getKingsPosition(isWhite());
         return findDirection(position, kingsPosition);
-    }
-
-    private boolean isDirectionThreatened(Direction directionToTheKing) {
-        A1Notation current = position;
-        UnaryOperator<A1Notation> director = parseToUnaryOperator(directionToTheKing.reverse());
-        while (current != null) {
-            current = director.apply(position);
-            if (board.isNotEmpty(current) && board.getPieceAt(current).canTreathen(directionToTheKing)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean isThereNoPieceBetweenKingAndThisPiece(Direction directionToTheKing) {
-        A1Notation kingsPosition = board.getKingsPosition(isWhite());
-        UnaryOperator<A1Notation> director = parseToUnaryOperator(directionToTheKing);
-        A1Notation current = position;
-        while (current != kingsPosition) {
-            current = director.apply(current);
-            if (board.isNotEmpty(current)) break;
-        }
-        return current == kingsPosition;
     }
 
     public boolean hasMoved() {
@@ -80,6 +56,13 @@ public abstract class AbstractPiece implements Piece {
 
     public boolean isActive() {
         return active;
+    }
+
+    @Override
+    public void setBoard(Board board) {
+        if (this.board == board) return;
+        if (this.board == null) this.board = board;
+        else throw new IllegalStateException("Cannot change board because it is already assigned");
     }
 
     public void captured() {

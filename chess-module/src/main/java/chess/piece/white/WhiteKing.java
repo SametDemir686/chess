@@ -1,11 +1,11 @@
 package chess.piece.white;
 
-import chess.match.Board;
+import chess.match.MatchBoard;
 import chess.piece.King;
 
 public class WhiteKing extends King implements WhitePiece {
-    public WhiteKing(Board board) {
-        super(board);
+    public WhiteKing(MatchBoard matchBoard) {
+        super(matchBoard);
     }
 
     @Override
@@ -16,5 +16,10 @@ public class WhiteKing extends King implements WhitePiece {
     @Override
     public String getHTMLCode() {
         return "&#9812;";
+    }
+
+    @Override
+    public WhiteKing copy() {
+        return new WhiteKing(null);
     }
 }

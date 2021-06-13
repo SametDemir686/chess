@@ -1,15 +1,15 @@
 package chess.piece;
 
 import chess.match.A1Notation;
-import chess.match.Board;
 import chess.match.Direction;
+import chess.match.MatchBoard;
 
 import static java.lang.Math.abs;
 
 public abstract class King extends AbstractPiece {
 
-    protected King(Board board) {
-        super(board);
+    protected King(MatchBoard matchBoard) {
+        super(matchBoard);
     }
 
     @Override
@@ -36,7 +36,7 @@ public abstract class King extends AbstractPiece {
     }
 
     @Override
-    public boolean isPinned() {
+    public boolean isPinned(A1Notation newPosition) {
         return false;
     }
 }

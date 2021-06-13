@@ -1,8 +1,8 @@
 package chess.piece.black;
 
 import chess.match.A1Notation;
-import chess.match.Board;
 import chess.match.Direction;
+import chess.match.MatchBoard;
 import chess.piece.Pawn;
 
 import static chess.util.Util.findDirection;
@@ -10,8 +10,8 @@ import static chess.util.Util.findMagnitudeSquare;
 
 public class BlackPawn extends Pawn implements BlackPiece {
 
-    public BlackPawn(Board board) {
-        super(board);
+    public BlackPawn(MatchBoard matchBoard) {
+        super(matchBoard);
     }
 
     @Override
@@ -49,5 +49,10 @@ public class BlackPawn extends Pawn implements BlackPiece {
     @Override
     public String getHTMLCode() {
         return "&#9823;";
+    }
+
+    @Override
+    public BlackPawn copy() {
+        return new BlackPawn(null);
     }
 }

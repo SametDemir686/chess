@@ -7,66 +7,82 @@ import chess.piece.white.*;
 import static chess.match.A1Notation.*;
 
 public class WhitePlayer extends Player {
+    @Override
     public WhiteKing getKing() {
         return (WhiteKing) king;
     }
 
+    @Override
     public WhiteQueen getQueen() {
         return (WhiteQueen) queen;
     }
 
+    @Override
     public WhiteBishop getDarkSquareBishop() {
         return (WhiteBishop) darkSquareBishop;
     }
 
+    @Override
     public WhiteBishop getLightSquareBishop() {
         return (WhiteBishop) lightSquareBishop;
     }
 
+    @Override
     public WhiteKnight getKnightB() {
         return (WhiteKnight) knightB;
     }
 
+    @Override
     public WhiteKnight getKnightG() {
         return (WhiteKnight) knightG;
     }
 
+    @Override
     public WhiteRook getRookA() {
         return (WhiteRook) rookA;
     }
 
+    @Override
     public WhiteRook getRookH() {
         return (WhiteRook) rookH;
     }
 
+    @Override
     public WhitePawn getaPawn() {
         return (WhitePawn) aPawn;
     }
 
+    @Override
     public WhitePawn getbPawn() {
         return (WhitePawn) bPawn;
     }
 
+    @Override
     public WhitePawn getcPawn() {
         return (WhitePawn) cPawn;
     }
 
+    @Override
     public WhitePawn getdPawn() {
         return (WhitePawn) dPawn;
     }
 
+    @Override
     public WhitePawn getePawn() {
         return (WhitePawn) ePawn;
     }
 
+    @Override
     public WhitePawn getfPawn() {
         return (WhitePawn) fPawn;
     }
 
+    @Override
     public WhitePawn getgPawn() {
         return (WhitePawn) gPawn;
     }
 
+    @Override
     public WhitePawn gethPawn() {
         return (WhitePawn) hPawn;
     }

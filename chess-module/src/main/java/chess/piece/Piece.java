@@ -1,6 +1,7 @@
 package chess.piece;
 
 import chess.match.A1Notation;
+import chess.match.Board;
 import chess.match.Direction;
 
 public interface Piece {
@@ -29,4 +30,8 @@ public interface Piece {
     }
 
     String getHTMLCode();
+
+    Piece copy();
+
+    void setBoard(Board board);
 }

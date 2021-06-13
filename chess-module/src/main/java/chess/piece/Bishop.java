@@ -1,14 +1,14 @@
 package chess.piece;
 
 import chess.match.A1Notation;
-import chess.match.Board;
 import chess.match.Direction;
+import chess.match.MatchBoard;
 
 import static chess.util.Util.findDirection;
 
 public abstract class Bishop extends AbstractPiece {
-    protected Bishop(Board board) {
-        super(board);
+    protected Bishop(MatchBoard matchBoard) {
+        super(matchBoard);
     }
 
     @Override

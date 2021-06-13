@@ -1,8 +1,8 @@
 package chess.piece.white;
 
 import chess.match.A1Notation;
-import chess.match.Board;
 import chess.match.Direction;
+import chess.match.MatchBoard;
 import chess.piece.Pawn;
 
 import static chess.util.Util.findDirection;
@@ -10,8 +10,8 @@ import static chess.util.Util.findMagnitudeSquare;
 
 public class WhitePawn extends Pawn implements WhitePiece {
 
-    public WhitePawn(Board board) {
-        super(board);
+    public WhitePawn(MatchBoard matchBoard) {
+        super(matchBoard);
     }
 
     @Override
@@ -47,5 +47,10 @@ public class WhitePawn extends Pawn implements WhitePiece {
     @Override
     public String getHTMLCode() {
         return "&#9817;";
+    }
+
+    @Override
+    public WhitePawn copy() {
+        return new WhitePawn(null);
     }
 }

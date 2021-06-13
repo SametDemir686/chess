@@ -5,8 +5,8 @@ import chess.match.Board;
 import chess.match.Direction;
 
 public class NullPiece extends AbstractPiece {
-    public NullPiece(Board board) {
-        super(board);
+    public NullPiece(Board matchBoard) {
+        super(matchBoard);
     }
 
     @Override
@@ -42,5 +42,10 @@ public class NullPiece extends AbstractPiece {
     @Override
     public String getHTMLCode() {
         return null;
+    }
+
+    @Override
+    public NullPiece copy() {
+        return new NullPiece(null);
     }
 }

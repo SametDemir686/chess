@@ -1,12 +1,12 @@
 package chess.piece.black;
 
-import chess.match.Board;
+import chess.match.MatchBoard;
 import chess.piece.King;
 
 public class BlackKing extends King implements BlackPiece {
 
-    public BlackKing(Board board) {
-        super(board);
+    public BlackKing(MatchBoard matchBoard) {
+        super(matchBoard);
     }
 
     @Override
@@ -17,5 +17,10 @@ public class BlackKing extends King implements BlackPiece {
     @Override
     public String getHTMLCode() {
         return "&#9818;";
+    }
+
+    @Override
+    public BlackKing copy() {
+        return new BlackKing(null);
     }
 }
