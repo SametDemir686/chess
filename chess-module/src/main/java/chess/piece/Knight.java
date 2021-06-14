@@ -1,15 +1,23 @@
 package chess.piece;
 
 import chess.match.A1Notation;
+import chess.match.Board;
 import chess.match.Direction;
-import chess.match.MatchBoard;
 
 import static java.lang.Math.abs;
 
 public abstract class Knight extends AbstractPiece {
 
-    protected Knight(MatchBoard matchBoard) {
-        super(matchBoard);
+    protected Knight(Board board) {
+        super(board);
+    }
+
+    public Knight(Knight knight) {
+        super(knight);
+    }
+
+    public Knight(Knight knight, Board board) {
+        super(knight, board);
     }
 
     @Override
@@ -30,4 +38,5 @@ public abstract class Knight extends AbstractPiece {
         return horDiff == 2 && verDiff == 1
                 || horDiff == 1 && verDiff == 2;
     }
+
 }

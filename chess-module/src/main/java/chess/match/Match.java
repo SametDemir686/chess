@@ -6,25 +6,29 @@ import static chess.match.Perspective.BLACK;
 import static chess.match.Perspective.WHITE;
 
 public class Match {
-    private MatchBoard matchBoard = new MatchBoard();
+    private Board board = new MatchBoard();
 
     public Match() {
-        matchBoard.initializeBoard();
+        board.initializeBoard();
     }
 
     public boolean move(A1Notation from, A1Notation to) {
-        return matchBoard.move(from, to);
+        return board.move(from, to);
     }
 
     public PieceDTO[][] getBoard(Perspective perspective) {
-        if (perspective == WHITE) return matchBoard.getBoardByWhitePerspective();
-        if (perspective == BLACK) return matchBoard.getBoardByBlackPerspective();
+        if (perspective == WHITE) return board.getBoardByWhitePerspective();
+        if (perspective == BLACK) return board.getBoardByBlackPerspective();
         throw new IllegalStateException("Unexpected value: " + perspective);
     }
 
     public String getBoardAsString(Perspective perspective) {
-        if (perspective == WHITE) return matchBoard.getBoardAsStringByWhitePerspective();
-        if (perspective == BLACK) return matchBoard.getBoardAsStringByBlackPerspective();
+        if (perspective == WHITE) return board.getBoardAsStringByWhitePerspective();
+        if (perspective == BLACK) return board.getBoardAsStringByBlackPerspective();
         throw new IllegalStateException("Unexpected value: " + perspective);
+    }
+
+    public void restart() {
+        board.resetBoard();
     }
 }

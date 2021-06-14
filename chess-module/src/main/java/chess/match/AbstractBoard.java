@@ -12,7 +12,7 @@ import static chess.util.MatrixUtil.*;
 
 public abstract class AbstractBoard implements Board {
     public static final int BOARD_SIZE = 8;
-    protected Piece[][] board;
+    protected Piece[][] board = new Piece[BOARD_SIZE][BOARD_SIZE];
     protected boolean isWhitesTurn = true;
     protected WhitePlayer whitePlayer = new WhitePlayer();
     protected BlackPlayer blackPlayer = new BlackPlayer();
@@ -180,7 +180,7 @@ public abstract class AbstractBoard implements Board {
     public boolean willThereBeCheckIfMoves(A1Notation from, A1Notation to) {
         if (from == null || to == null) return false;
         if (isEmpty(from)) return false;
-        DummyBoard dummyBoard = new DummyBoard(deepCopyBoard(board), whitePlayer, blackPlayer);
+        DummyBoard dummyBoard = new DummyBoard(whitePlayer, blackPlayer);
         dummyBoard.move(from, to);
         return dummyBoard.isChecked(isWhitesTurn);
     }

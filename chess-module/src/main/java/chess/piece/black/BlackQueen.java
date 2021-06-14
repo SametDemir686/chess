@@ -1,12 +1,20 @@
 package chess.piece.black;
 
-import chess.match.MatchBoard;
+import chess.match.Board;
 import chess.piece.Queen;
 
 public class BlackQueen extends Queen implements BlackPiece {
 
-    public BlackQueen(MatchBoard matchBoard) {
-        super(matchBoard);
+    public BlackQueen(Board board) {
+        super(board);
+    }
+
+    public BlackQueen(BlackQueen queen) {
+        super(queen);
+    }
+
+    public BlackQueen(BlackQueen blackQueen, Board board) {
+        super(blackQueen, board);
     }
 
     @Override
@@ -20,7 +28,8 @@ public class BlackQueen extends Queen implements BlackPiece {
     }
 
     @Override
-    public BlackQueen copy() {
-        return new BlackQueen(null);
+    public BlackQueen copyToBoard(Board board) {
+        return new BlackQueen(this, board);
     }
+
 }

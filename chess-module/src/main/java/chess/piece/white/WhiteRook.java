@@ -1,11 +1,19 @@
 package chess.piece.white;
 
-import chess.match.MatchBoard;
+import chess.match.Board;
 import chess.piece.Rook;
 
 public class WhiteRook extends Rook implements WhitePiece {
-    public WhiteRook(MatchBoard matchBoard) {
-        super(matchBoard);
+    public WhiteRook(Board board) {
+        super(board);
+    }
+
+    public WhiteRook(WhiteRook whiteRook, Board board) {
+        super(whiteRook, board);
+    }
+
+    public WhiteRook(WhiteRook rook) {
+        super(rook);
     }
 
     @Override
@@ -19,7 +27,8 @@ public class WhiteRook extends Rook implements WhitePiece {
     }
 
     @Override
-    public WhiteRook copy() {
-        return new WhiteRook(null);
+    public WhiteRook copyToBoard(Board board) {
+        return new WhiteRook(this, board);
     }
+
 }

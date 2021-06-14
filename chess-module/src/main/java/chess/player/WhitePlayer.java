@@ -1,90 +1,217 @@
 package chess.player;
 
 import chess.match.A1Notation;
+import chess.match.Board;
 import chess.piece.*;
 import chess.piece.white.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import static chess.match.A1Notation.*;
 
-public class WhitePlayer extends Player {
+public class WhitePlayer implements Player {
+    private WhiteKing king;
+    private WhiteQueen queen;
+    private WhiteBishop darkSquareBishop;
+    private WhiteBishop lightSquareBishop;
+    private WhiteKnight knightB;
+    private WhiteKnight knightG;
+    private WhiteRook rookA;
+    private WhiteRook rookH;
+    private WhitePawn aPawn;
+    private WhitePawn bPawn;
+    private WhitePawn cPawn;
+    private WhitePawn dPawn;
+    private WhitePawn ePawn;
+    private WhitePawn fPawn;
+    private WhitePawn gPawn;
+    private WhitePawn hPawn;
+
+    public WhitePlayer() {
+    }
+
+    public WhitePlayer(WhitePlayer whitePlayer) {
+        king = new WhiteKing(whitePlayer.king);
+        queen = new WhiteQueen(whitePlayer.queen);
+        darkSquareBishop = new WhiteBishop(whitePlayer.darkSquareBishop);
+        lightSquareBishop = new WhiteBishop(whitePlayer.lightSquareBishop);
+        knightB = new WhiteKnight(whitePlayer.knightB);
+        knightG = new WhiteKnight(whitePlayer.knightG);
+        rookA = new WhiteRook(whitePlayer.rookA);
+        rookH = new WhiteRook(whitePlayer.rookH);
+        aPawn = new WhitePawn(whitePlayer.aPawn);
+        bPawn = new WhitePawn(whitePlayer.bPawn);
+        cPawn = new WhitePawn(whitePlayer.cPawn);
+        dPawn = new WhitePawn(whitePlayer.dPawn);
+        ePawn = new WhitePawn(whitePlayer.ePawn);
+        fPawn = new WhitePawn(whitePlayer.fPawn);
+        gPawn = new WhitePawn(whitePlayer.gPawn);
+        hPawn = new WhitePawn(whitePlayer.hPawn);
+    }
+
+    public List<WhitePiece> getAllActivePieces() {
+        return stream()
+                .filter(WhitePiece::isActive)
+                .collect(Collectors.toList());
+    }
+
+    private Stream<WhitePiece> stream() {
+        return Stream.of(
+                king, queen,
+                darkSquareBishop, lightSquareBishop,
+                knightB, knightG,
+                rookA, rookH,
+                aPawn, bPawn, cPawn, dPawn, ePawn, fPawn, gPawn, hPawn);
+    }
+
+    public void setBoard(Board board) {
+        stream().forEach(piece -> piece.setBoard(board));
+    }
+
     @Override
     public WhiteKing getKing() {
-        return (WhiteKing) king;
+        return king;
+    }
+
+    public void setKing(WhiteKing king) {
+        this.king = king;
     }
 
     @Override
     public WhiteQueen getQueen() {
-        return (WhiteQueen) queen;
+        return queen;
+    }
+
+    public void setQueen(WhiteQueen queen) {
+        this.queen = queen;
     }
 
     @Override
     public WhiteBishop getDarkSquareBishop() {
-        return (WhiteBishop) darkSquareBishop;
+        return darkSquareBishop;
+    }
+
+    public void setDarkSquareBishop(WhiteBishop darkSquareBishop) {
+        this.darkSquareBishop = darkSquareBishop;
     }
 
     @Override
     public WhiteBishop getLightSquareBishop() {
-        return (WhiteBishop) lightSquareBishop;
+        return lightSquareBishop;
+    }
+
+    public void setLightSquareBishop(WhiteBishop lightSquareBishop) {
+        this.lightSquareBishop = lightSquareBishop;
     }
 
     @Override
     public WhiteKnight getKnightB() {
-        return (WhiteKnight) knightB;
+        return knightB;
+    }
+
+    public void setKnightB(WhiteKnight knightB) {
+        this.knightB = knightB;
     }
 
     @Override
     public WhiteKnight getKnightG() {
-        return (WhiteKnight) knightG;
+        return knightG;
+    }
+
+    public void setKnightG(WhiteKnight knightG) {
+        this.knightG = knightG;
     }
 
     @Override
     public WhiteRook getRookA() {
-        return (WhiteRook) rookA;
+        return rookA;
+    }
+
+    public void setRookA(WhiteRook rookA) {
+        this.rookA = rookA;
     }
 
     @Override
     public WhiteRook getRookH() {
-        return (WhiteRook) rookH;
+        return rookH;
+    }
+
+    public void setRookH(WhiteRook rookH) {
+        this.rookH = rookH;
     }
 
     @Override
     public WhitePawn getaPawn() {
-        return (WhitePawn) aPawn;
+        return aPawn;
+    }
+
+    public void setaPawn(WhitePawn aPawn) {
+        this.aPawn = aPawn;
     }
 
     @Override
     public WhitePawn getbPawn() {
-        return (WhitePawn) bPawn;
+        return bPawn;
+    }
+
+    public void setbPawn(WhitePawn bPawn) {
+        this.bPawn = bPawn;
     }
 
     @Override
     public WhitePawn getcPawn() {
-        return (WhitePawn) cPawn;
+        return cPawn;
+    }
+
+    public void setcPawn(WhitePawn cPawn) {
+        this.cPawn = cPawn;
     }
 
     @Override
     public WhitePawn getdPawn() {
-        return (WhitePawn) dPawn;
+        return dPawn;
+    }
+
+    public void setdPawn(WhitePawn dPawn) {
+        this.dPawn = dPawn;
     }
 
     @Override
     public WhitePawn getePawn() {
-        return (WhitePawn) ePawn;
+        return ePawn;
+    }
+
+    public void setePawn(WhitePawn ePawn) {
+        this.ePawn = ePawn;
     }
 
     @Override
     public WhitePawn getfPawn() {
-        return (WhitePawn) fPawn;
+        return fPawn;
+    }
+
+    public void setfPawn(WhitePawn fPawn) {
+        this.fPawn = fPawn;
     }
 
     @Override
     public WhitePawn getgPawn() {
-        return (WhitePawn) gPawn;
+        return gPawn;
+    }
+
+    public void setgPawn(WhitePawn gPawn) {
+        this.gPawn = gPawn;
     }
 
     @Override
     public WhitePawn gethPawn() {
-        return (WhitePawn) hPawn;
+        return hPawn;
+    }
+
+    public void sethPawn(WhitePawn hPawn) {
+        this.hPawn = hPawn;
     }
 
     public void add(A1Notation position, WhitePiece piece) {

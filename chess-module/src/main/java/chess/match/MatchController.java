@@ -27,4 +27,10 @@ public class MatchController {
         return match.move(from, to);
     }
 
+    @CrossOrigin
+    @PostMapping("/restart")
+    public void restart() {
+        match.restart();
+    }
+
 }

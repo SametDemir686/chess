@@ -1,12 +1,20 @@
 package chess.piece.white;
 
-import chess.match.MatchBoard;
+import chess.match.Board;
 import chess.piece.Bishop;
 
 public class WhiteBishop extends Bishop implements WhitePiece {
 
-    public WhiteBishop(MatchBoard matchBoard) {
-        super(matchBoard);
+    public WhiteBishop(Board board) {
+        super(board);
+    }
+
+    public WhiteBishop(WhiteBishop whiteBishop, Board board) {
+        super(whiteBishop, board);
+    }
+
+    public WhiteBishop(WhiteBishop bishop) {
+        super(bishop);
     }
 
     @Override
@@ -20,7 +28,8 @@ public class WhiteBishop extends Bishop implements WhitePiece {
     }
 
     @Override
-    public WhiteBishop copy() {
-        return new WhiteBishop(null);
+    public WhiteBishop copyToBoard(Board board) {
+        return new WhiteBishop(this, board);
     }
+
 }

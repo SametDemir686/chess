@@ -1,14 +1,22 @@
 package chess.piece;
 
 import chess.match.A1Notation;
+import chess.match.Board;
 import chess.match.Direction;
-import chess.match.MatchBoard;
 
 import static chess.util.Util.findDirection;
 
 public abstract class Bishop extends AbstractPiece {
-    protected Bishop(MatchBoard matchBoard) {
-        super(matchBoard);
+    protected Bishop(Board board) {
+        super(board);
+    }
+
+    protected Bishop(Bishop bishop) {
+        super(bishop);
+    }
+
+    protected Bishop(Bishop bishop, Board board) {
+        super(bishop, board);
     }
 
     @Override
@@ -35,4 +43,5 @@ public abstract class Bishop extends AbstractPiece {
         Direction direction = findDirection(position, at);
         return canTreathen(direction);
     }
+
 }

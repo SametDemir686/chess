@@ -1,12 +1,20 @@
 package chess.piece.black;
 
-import chess.match.MatchBoard;
+import chess.match.Board;
 import chess.piece.King;
 
 public class BlackKing extends King implements BlackPiece {
 
-    public BlackKing(MatchBoard matchBoard) {
-        super(matchBoard);
+    public BlackKing(Board board) {
+        super(board);
+    }
+
+    public BlackKing(BlackKing king) {
+        super(king);
+    }
+
+    public BlackKing(BlackKing blackKing, Board board) {
+        super(blackKing, board);
     }
 
     @Override
@@ -20,7 +28,8 @@ public class BlackKing extends King implements BlackPiece {
     }
 
     @Override
-    public BlackKing copy() {
-        return new BlackKing(null);
+    public BlackKing copyToBoard(Board board) {
+        return new BlackKing(this, board);
     }
+
 }

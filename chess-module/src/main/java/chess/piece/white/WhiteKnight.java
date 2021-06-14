@@ -1,11 +1,19 @@
 package chess.piece.white;
 
-import chess.match.MatchBoard;
+import chess.match.Board;
 import chess.piece.Knight;
 
 public class WhiteKnight extends Knight implements WhitePiece {
-    public WhiteKnight(MatchBoard matchBoard) {
-        super(matchBoard);
+    public WhiteKnight(Board board) {
+        super(board);
+    }
+
+    public WhiteKnight(WhiteKnight whiteKnight, Board board) {
+        super(whiteKnight, board);
+    }
+
+    public WhiteKnight(WhiteKnight knight) {
+        super(knight);
     }
 
     @Override
@@ -19,7 +27,7 @@ public class WhiteKnight extends Knight implements WhitePiece {
     }
 
     @Override
-    public WhiteKnight copy() {
-        return new WhiteKnight(null);
+    public WhiteKnight copyToBoard(Board board) {
+        return new WhiteKnight(this, board);
     }
 }

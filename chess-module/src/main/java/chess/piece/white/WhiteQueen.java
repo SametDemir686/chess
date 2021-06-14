@@ -1,11 +1,19 @@
 package chess.piece.white;
 
-import chess.match.MatchBoard;
+import chess.match.Board;
 import chess.piece.Queen;
 
 public class WhiteQueen extends Queen implements WhitePiece {
-    public WhiteQueen(MatchBoard matchBoard) {
-        super(matchBoard);
+    public WhiteQueen(Board board) {
+        super(board);
+    }
+
+    public WhiteQueen(WhiteQueen whiteQueen, Board board) {
+        super(whiteQueen, board);
+    }
+
+    public WhiteQueen(WhiteQueen queen) {
+        super(queen);
     }
 
     @Override
@@ -19,7 +27,8 @@ public class WhiteQueen extends Queen implements WhitePiece {
     }
 
     @Override
-    public WhiteQueen copy() {
-        return new WhiteQueen(null);
+    public WhiteQueen copyToBoard(Board board) {
+        return new WhiteQueen(this, board);
     }
+
 }

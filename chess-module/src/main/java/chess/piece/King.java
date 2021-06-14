@@ -1,15 +1,23 @@
 package chess.piece;
 
 import chess.match.A1Notation;
+import chess.match.Board;
 import chess.match.Direction;
-import chess.match.MatchBoard;
 
 import static java.lang.Math.abs;
 
 public abstract class King extends AbstractPiece {
 
-    protected King(MatchBoard matchBoard) {
-        super(matchBoard);
+    protected King(Board board) {
+        super(board);
+    }
+
+    protected King(King king) {
+        super(king);
+    }
+
+    protected King(King king, Board board) {
+        super(king, board);
     }
 
     @Override
@@ -35,8 +43,8 @@ public abstract class King extends AbstractPiece {
         return horDiff <= 1 && verDiff <= 1;
     }
 
-    @Override
     public boolean isPinned(A1Notation newPosition) {
         return false;
     }
+
 }

@@ -1,20 +1,20 @@
 package chess.match;
 
-import chess.piece.Piece;
 import chess.player.BlackPlayer;
 import chess.player.WhitePlayer;
 
 public class DummyBoard extends AbstractBoard {
 
-    public DummyBoard(Piece[][] board, WhitePlayer whitePlayer, BlackPlayer blackPlayer) {
-        this.board = board;
-        this.whitePlayer = whitePlayer;
-        this.blackPlayer = blackPlayer;
-        for (Piece[] pieces : board) {
-            for (Piece piece : pieces) {
-                piece.setBoard(this);
-            }
-        }
+    public DummyBoard(WhitePlayer whitePlayer, BlackPlayer blackPlayer) {
+        removeAllPieces();
+        this.whitePlayer = new WhitePlayer(whitePlayer);
+        this.blackPlayer = new BlackPlayer(blackPlayer);
+
+        this.whitePlayer.getAllActivePieces().forEach(s -> put(s.getPosition(), s));
+        this.blackPlayer.getAllActivePieces().forEach(s -> put(s.getPosition(), s));
+
+        this.whitePlayer.setBoard(this);
+        this.blackPlayer.setBoard(this);
     }
 
     @Override

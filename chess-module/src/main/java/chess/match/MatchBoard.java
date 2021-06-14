@@ -1,6 +1,5 @@
 package chess.match;
 
-import chess.piece.Piece;
 import chess.piece.black.*;
 import chess.piece.white.*;
 
@@ -9,7 +8,6 @@ import static chess.match.A1Notation.*;
 public class MatchBoard extends AbstractBoard {
 
     public MatchBoard() {
-        board = new Piece[BOARD_SIZE][BOARD_SIZE];
         removeAllPieces();
     }
 
@@ -23,6 +21,7 @@ public class MatchBoard extends AbstractBoard {
     public void resetBoard() {
         removeAllPieces();
         initializeBoard();
+        isWhitesTurn = true;
     }
 
     private void initilizeBlackPieces() {

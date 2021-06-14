@@ -54,3 +54,8 @@ function httpPost(theUrl) {
     xmlHttp.withCredentials = true;
     xmlHttp.send(null);
 }
+
+function restart() {
+    httpPost('http://localhost:8080/match/restart');
+    updateBoard();
+}

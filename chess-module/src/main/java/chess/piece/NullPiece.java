@@ -9,6 +9,10 @@ public class NullPiece extends AbstractPiece {
         super(matchBoard);
     }
 
+    public NullPiece(NullPiece nullPiece, Board board) {
+        super(nullPiece, board);
+    }
+
     @Override
     public String toString() {
         return "__";
@@ -45,7 +49,8 @@ public class NullPiece extends AbstractPiece {
     }
 
     @Override
-    public NullPiece copy() {
-        return new NullPiece(null);
+    public Piece copyToBoard(Board board) {
+        return new NullPiece(this, board);
     }
+
 }

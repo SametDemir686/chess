@@ -1,14 +1,22 @@
 package chess.piece;
 
 import chess.match.A1Notation;
+import chess.match.Board;
 import chess.match.Direction;
-import chess.match.MatchBoard;
 
 import static chess.util.Util.findDirection;
 
 public abstract class Rook extends AbstractPiece {
-    protected Rook(MatchBoard matchBoard) {
-        super(matchBoard);
+    protected Rook(Board board) {
+        super(board);
+    }
+
+    protected Rook(Rook rook) {
+        super(rook);
+    }
+
+    protected Rook(Rook rook, Board board) {
+        super(rook, board);
     }
 
     @Override

@@ -1,12 +1,20 @@
 package chess.piece.black;
 
-import chess.match.MatchBoard;
+import chess.match.Board;
 import chess.piece.Rook;
 
 public class BlackRook extends Rook implements BlackPiece {
 
-    public BlackRook(MatchBoard matchBoard) {
-        super(matchBoard);
+    public BlackRook(Board board) {
+        super(board);
+    }
+
+    public BlackRook(BlackRook rook) {
+        super(rook);
+    }
+
+    public BlackRook(BlackRook blackRook, Board board) {
+        super(blackRook, board);
     }
 
     @Override
@@ -20,7 +28,8 @@ public class BlackRook extends Rook implements BlackPiece {
     }
 
     @Override
-    public BlackRook copy() {
-        return new BlackRook(null);
+    public BlackRook copyToBoard(Board board) {
+        return new BlackRook(this, board);
     }
+
 }

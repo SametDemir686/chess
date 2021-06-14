@@ -12,10 +12,21 @@ import static chess.util.Util.parseToUnaryOperator;
 public abstract class AbstractPiece implements Piece {
     protected Board board;
     protected A1Notation position;
-    private boolean active = true;
-    private boolean moved = false;
+    protected boolean active = true;
+    protected boolean moved = false;
 
     protected AbstractPiece(Board board) {
+        this.board = board;
+    }
+
+    protected AbstractPiece(AbstractPiece piece) {
+        position = piece.position;
+        active = piece.active;
+        moved = piece.moved;
+    }
+
+    protected AbstractPiece(AbstractPiece piece, Board board) {
+        this(piece);
         this.board = board;
     }
 
@@ -31,19 +42,8 @@ public abstract class AbstractPiece implements Piece {
 
     @Override
     public boolean canMoveTo(A1Notation newPosition) {
-        return !isPinned(newPosition)
+        return !board.willThereBeCheckIfMoves(this.position, newPosition)
                 && isNotOccupiedByAllyPiece(newPosition);
-    }
-
-    public boolean isPinned(A1Notation newPosition) {
-        Direction directionToTheKing = findDirectionToTheKing();
-        if (!directionToTheKing.isValid()) return false;
-        return board.willThereBeCheckIfMoves(this.position, newPosition);
-    }
-
-    private Direction findDirectionToTheKing() {
-        A1Notation kingsPosition = board.getKingsPosition(isWhite());
-        return findDirection(position, kingsPosition);
     }
 
     public boolean hasMoved() {
@@ -67,6 +67,7 @@ public abstract class AbstractPiece implements Piece {
 
     public void captured() {
         this.active = false;
+        this.position = null;
     }
 
     public boolean isNotOccupiedByAllyPiece(A1Notation newPosition) {

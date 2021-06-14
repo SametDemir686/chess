@@ -31,7 +31,7 @@ public interface Piece {
 
     String getHTMLCode();
 
-    Piece copy();
-
     void setBoard(Board board);
+
+    Piece copyToBoard(Board board);
 }

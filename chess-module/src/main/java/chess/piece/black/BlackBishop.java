@@ -1,12 +1,20 @@
 package chess.piece.black;
 
-import chess.match.MatchBoard;
+import chess.match.Board;
 import chess.piece.Bishop;
 
 public class BlackBishop extends Bishop implements BlackPiece {
 
-    public BlackBishop(MatchBoard matchBoard) {
-        super(matchBoard);
+    public BlackBishop(Board board) {
+        super(board);
+    }
+
+    public BlackBishop(BlackBishop blackBishop) {
+        super(blackBishop);
+    }
+
+    public BlackBishop(BlackBishop blackBishop, Board board) {
+        super(blackBishop, board);
     }
 
     @Override
@@ -20,7 +28,8 @@ public class BlackBishop extends Bishop implements BlackPiece {
     }
 
     @Override
-    public BlackBishop copy() {
-        return new BlackBishop(null);
+    public BlackBishop copyToBoard(Board board) {
+        return new BlackBishop(this, board);
     }
+
 }

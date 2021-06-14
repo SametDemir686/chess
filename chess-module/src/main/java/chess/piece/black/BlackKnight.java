@@ -1,12 +1,20 @@
 package chess.piece.black;
 
-import chess.match.MatchBoard;
+import chess.match.Board;
 import chess.piece.Knight;
 
 public class BlackKnight extends Knight implements BlackPiece {
 
-    public BlackKnight(MatchBoard matchBoard) {
-        super(matchBoard);
+    public BlackKnight(Board board) {
+        super(board);
+    }
+
+    public BlackKnight(BlackKnight knight) {
+        super(knight);
+    }
+
+    public BlackKnight(BlackKnight blackKnight, Board board) {
+        super(blackKnight, board);
     }
 
     @Override
@@ -20,7 +28,8 @@ public class BlackKnight extends Knight implements BlackPiece {
     }
 
     @Override
-    public BlackKnight copy() {
-        return new BlackKnight(null);
+    public BlackKnight copyToBoard(Board board) {
+        return new BlackKnight(this, board);
     }
+
 }
