@@ -8,7 +8,10 @@ import java.util.function.UnaryOperator;
 import static chess.match.Direction.*;
 import static java.lang.Math.abs;
 
-public class Util {
+public class DirectionUtil {
+    private DirectionUtil() {
+    }
+
     public static UnaryOperator<A1Notation> parseToUnaryOperator(Direction direction) {
         switch (direction) {
             case UP:

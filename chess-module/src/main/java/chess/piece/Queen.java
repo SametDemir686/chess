@@ -4,7 +4,7 @@ import chess.match.A1Notation;
 import chess.match.Board;
 import chess.match.Direction;
 
-import static chess.util.Util.findDirection;
+import static chess.util.DirectionUtil.findDirection;
 
 public abstract class Queen extends AbstractPiece {
 

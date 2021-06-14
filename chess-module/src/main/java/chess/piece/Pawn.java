@@ -4,8 +4,8 @@ import chess.match.A1Notation;
 import chess.match.Board;
 import chess.match.Direction;
 
-import static chess.util.Util.findDirection;
-import static chess.util.Util.findMagnitudeSquare;
+import static chess.util.DirectionUtil.findDirection;
+import static chess.util.DirectionUtil.findMagnitudeSquare;
 
 public abstract class Pawn extends AbstractPiece {
     protected Pawn(Board board) {

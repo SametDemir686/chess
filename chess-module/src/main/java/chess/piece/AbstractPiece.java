@@ -6,8 +6,8 @@ import chess.match.Direction;
 
 import java.util.function.UnaryOperator;
 
-import static chess.util.Util.findDirection;
-import static chess.util.Util.parseToUnaryOperator;
+import static chess.util.DirectionUtil.findDirection;
+import static chess.util.DirectionUtil.parseToUnaryOperator;
 
 public abstract class AbstractPiece implements Piece {
     protected Board board;
