@@ -48,13 +48,6 @@ public class BlackPawn extends Pawn implements BlackPiece {
     }
 
     @Override
-    public boolean threatens(A1Notation position) {
-        Direction direction = findDirection(this.position, position);
-        int magnitudeSquare = findMagnitudeSquare(this.position, position);
-        return canTreathen(direction) && magnitudeSquare == 2;
-    }
-
-    @Override
     public String getHTMLCode() {
         return "&#9823;";
     }

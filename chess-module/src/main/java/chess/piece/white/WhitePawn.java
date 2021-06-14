@@ -48,11 +48,6 @@ public class WhitePawn extends Pawn implements WhitePiece {
     }
 
     @Override
-    public boolean threatens(A1Notation position) {
-        return false;
-    }
-
-    @Override
     public String getHTMLCode() {
         return "&#9817;";
     }
