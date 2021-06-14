@@ -1,12 +1,8 @@
 package chess.piece.white;
 
-import chess.match.A1Notation;
 import chess.match.Board;
 import chess.match.Direction;
 import chess.piece.Pawn;
-
-import static chess.util.Util.findDirection;
-import static chess.util.Util.findMagnitudeSquare;
 
 public class WhitePawn extends Pawn implements WhitePiece {
 
@@ -27,18 +23,10 @@ public class WhitePawn extends Pawn implements WhitePiece {
         return "WP";
     }
 
+
     @Override
-    public boolean canMoveTo(A1Notation newPosition) {
-        if (!super.canMoveTo(newPosition)) return false;
-        Direction direction = findDirection(position, newPosition);
-        int magnitudeSquare = findMagnitudeSquare(position, newPosition);
-        if (direction == Direction.UP_LEFT || direction == Direction.UP_RIGHT && magnitudeSquare == 2) {
-            return board.isOccupiedByBlackPiece(newPosition);
-        } else if (direction == Direction.UP) {
-            if (!hasMoved()) return magnitudeSquare == 1 || magnitudeSquare == 4;
-            else return magnitudeSquare == 1;
-        }
-        return false;
+    public boolean canMove(Direction direction) {
+        return direction == Direction.UP;
     }
 
     @Override

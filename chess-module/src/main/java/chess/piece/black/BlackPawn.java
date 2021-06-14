@@ -1,12 +1,8 @@
 package chess.piece.black;
 
-import chess.match.A1Notation;
 import chess.match.Board;
 import chess.match.Direction;
 import chess.piece.Pawn;
-
-import static chess.util.Util.findDirection;
-import static chess.util.Util.findMagnitudeSquare;
 
 public class BlackPawn extends Pawn implements BlackPiece {
 
@@ -28,17 +24,8 @@ public class BlackPawn extends Pawn implements BlackPiece {
     }
 
     @Override
-    public boolean canMoveTo(A1Notation newPosition) {
-        if (!super.canMoveTo(newPosition)) return false;
-        Direction direction = findDirection(position, newPosition);
-        int magnitudeSquare = findMagnitudeSquare(position, newPosition);
-        if (direction == Direction.DOWN_LEFT || direction == Direction.DOWN_RIGHT && magnitudeSquare == 2) {
-            return board.isOccupiedByWhitePiece(newPosition);
-        } else if (direction == Direction.DOWN) {
-            if (!hasMoved()) return magnitudeSquare == 1 || magnitudeSquare == 4;
-            else return magnitudeSquare == 1;
-        }
-        return false;
+    public boolean canMove(Direction direction) {
+        return direction == Direction.DOWN;
     }
 
     @Override

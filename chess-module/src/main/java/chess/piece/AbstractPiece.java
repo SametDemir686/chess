@@ -70,9 +70,26 @@ public abstract class AbstractPiece implements Piece {
         this.position = null;
     }
 
+    @Override
     public boolean isNotOccupiedByAllyPiece(A1Notation newPosition) {
-        return isWhite() != board.getPieceAt(newPosition).isWhite()
-                || isBlack() != board.getPieceAt(newPosition).isBlack();
+        return !isOccupiedByAllyPiece(newPosition);
+    }
+
+    @Override
+    public boolean isNotOccupiedByEnemyPiece(A1Notation newPosition) {
+        return !isOccupiedByEnemyPiece(newPosition);
+    }
+
+    @Override
+    public boolean isOccupiedByAllyPiece(A1Notation newPosition) {
+        return !board.isEmpty(newPosition)
+                && isWhite() == board.getPieceAt(newPosition).isWhite();
+    }
+
+    @Override
+    public boolean isOccupiedByEnemyPiece(A1Notation newPosition) {
+        return !board.isEmpty(newPosition)
+                && isWhite() != board.getPieceAt(newPosition).isWhite();
     }
 
     public boolean isTreathenedByEnemyPiece(A1Notation newPosition) {

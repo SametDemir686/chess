@@ -34,4 +34,12 @@ public interface Piece {
     void setBoard(Board board);
 
     Piece copyToBoard(Board board);
+
+    boolean isNotOccupiedByAllyPiece(A1Notation newPosition);
+
+    boolean isNotOccupiedByEnemyPiece(A1Notation newPosition);
+
+    boolean isOccupiedByAllyPiece(A1Notation newPosition);
+
+    boolean isOccupiedByEnemyPiece(A1Notation newPosition);
 }
