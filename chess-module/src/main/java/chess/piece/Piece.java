@@ -4,7 +4,6 @@ import chess.board.Board;
 import chess.match.A1Notation;
 import chess.match.Direction;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -51,8 +50,8 @@ public interface Piece {
 
     boolean isOccupiedByEnemyPiece(A1Notation newPosition);
 
-    default List<A1Notation> getAllPossibleMoves() {
-        return getAllPossibleSquares().stream().filter(this::canMoveTo).collect(Collectors.toList());
+    default Set<A1Notation> getAllPossibleMoves() {
+        return getAllPossibleSquares().stream().filter(this::canMoveTo).collect(Collectors.toSet());
     }
 
     Set<A1Notation> getAllPossibleSquares();
