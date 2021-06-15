@@ -1,8 +1,8 @@
 package chess.board;
 
 import chess.match.A1Notation;
+import chess.match.Perspective;
 import chess.piece.Piece;
-import chess.piece.PieceDTO;
 import chess.piece.black.BlackPiece;
 import chess.piece.white.WhitePiece;
 
@@ -73,8 +73,6 @@ public interface Board {
 
     void putWhiteKing(A1Notation position);
 
-    PieceDTO[][] getBoardDTO();
-
-    Piece[][] getBoard();
+    Piece[][] getBoard(Perspective perspective);
 
 }
