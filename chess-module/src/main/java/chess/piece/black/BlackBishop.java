@@ -1,12 +1,12 @@
 package chess.piece.black;
 
-import chess.match.Board;
+import chess.board.Board;
 import chess.piece.Bishop;
 
 public class BlackBishop extends Bishop implements BlackPiece {
 
-    public BlackBishop(Board board) {
-        super(board);
+    public BlackBishop() {
+        super();
     }
 
     public BlackBishop(BlackBishop blackBishop) {
@@ -19,7 +19,7 @@ public class BlackBishop extends Bishop implements BlackPiece {
 
     @Override
     public String toString() {
-        return "BB";
+        return "♝";
     }
 
     @Override

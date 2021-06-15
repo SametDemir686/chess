@@ -16,12 +16,6 @@ public class MatchController {
     }
 
     @CrossOrigin
-    @GetMapping("/getBoardAsString")
-    public String getBoardAsString(Perspective perspective) {
-        return match.getBoardAsString(perspective);
-    }
-
-    @CrossOrigin
     @PostMapping("/move")
     public boolean move(A1Notation from, A1Notation to) {
         return match.move(from, to);

@@ -1,11 +1,11 @@
 package chess.piece.white;
 
-import chess.match.Board;
+import chess.board.Board;
 import chess.piece.Knight;
 
 public class WhiteKnight extends Knight implements WhitePiece {
-    public WhiteKnight(Board board) {
-        super(board);
+    public WhiteKnight() {
+        super();
     }
 
     public WhiteKnight(WhiteKnight whiteKnight, Board board) {
@@ -18,7 +18,7 @@ public class WhiteKnight extends Knight implements WhitePiece {
 
     @Override
     public String toString() {
-        return "WH";
+        return "♘";
     }
 
     @Override

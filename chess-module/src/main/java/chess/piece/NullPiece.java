@@ -1,12 +1,15 @@
 package chess.piece;
 
+import chess.board.Board;
 import chess.match.A1Notation;
-import chess.match.Board;
 import chess.match.Direction;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class NullPiece extends AbstractPiece {
-    public NullPiece(Board matchBoard) {
-        super(matchBoard);
+    public NullPiece() {
+        super();
     }
 
     public NullPiece(NullPiece nullPiece, Board board) {
@@ -53,4 +56,8 @@ public class NullPiece extends AbstractPiece {
         return new NullPiece(this, board);
     }
 
+    @Override
+    public Set<A1Notation> getAllPossibleSquares() {
+        return new HashSet<>();
+    }
 }

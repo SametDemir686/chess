@@ -1,13 +1,17 @@
 package chess.piece.black;
 
-import chess.match.Board;
+import chess.board.Board;
+import chess.match.A1Notation;
 import chess.match.Direction;
 import chess.piece.Pawn;
 
+import java.util.function.UnaryOperator;
+import java.util.stream.Stream;
+
 public class BlackPawn extends Pawn implements BlackPiece {
 
-    public BlackPawn(Board board) {
-        super(board);
+    public BlackPawn() {
+        super();
     }
 
     public BlackPawn(BlackPawn aPawn) {
@@ -20,7 +24,7 @@ public class BlackPawn extends Pawn implements BlackPiece {
 
     @Override
     public String toString() {
-        return "BP";
+        return "♟";
     }
 
     @Override
@@ -44,4 +48,7 @@ public class BlackPawn extends Pawn implements BlackPiece {
         return new BlackPawn(this, board);
     }
 
+    public Stream<UnaryOperator<A1Notation>> getAllPossibleDirections() {
+        return Stream.of(A1Notation::downLeft, A1Notation::down, A1Notation::downRight);
+    }
 }

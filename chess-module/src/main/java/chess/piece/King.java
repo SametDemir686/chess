@@ -1,15 +1,20 @@
 package chess.piece;
 
+import chess.board.Board;
 import chess.match.A1Notation;
-import chess.match.Board;
 import chess.match.Direction;
 
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static chess.util.DirectionUtil.getAllDirections;
 import static java.lang.Math.abs;
 
 public abstract class King extends AbstractPiece {
 
-    protected King(Board board) {
-        super(board);
+    protected King() {
+        super();
     }
 
     protected King(King king) {
@@ -18,6 +23,10 @@ public abstract class King extends AbstractPiece {
 
     protected King(King king, Board board) {
         super(king, board);
+    }
+
+    protected King(A1Notation position, Board board) {
+        super(position);
     }
 
     @Override
@@ -34,7 +43,7 @@ public abstract class King extends AbstractPiece {
 
     @Override
     public boolean threatens(A1Notation position) {
-        return false;
+        return hasALookAt(position);
     }
 
     private boolean hasALookAt(A1Notation otherPosition) {
@@ -43,8 +52,13 @@ public abstract class King extends AbstractPiece {
         return horDiff <= 1 && verDiff <= 1;
     }
 
-    public boolean isPinned(A1Notation newPosition) {
-        return false;
+    @Override
+    public Set<A1Notation> getAllPossibleSquares() {
+        return getAllDirections()
+                .stream()
+                .map(s -> s.apply(position))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
     }
 
 }

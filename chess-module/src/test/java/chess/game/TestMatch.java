@@ -1,7 +1,6 @@
 package chess.game;
 
 import chess.match.Match;
-import chess.match.Perspective;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -20,7 +19,6 @@ public class TestMatch {
         match.move(E7, E5);
         match.move(E4, D5);
 
-        System.out.println(match.getBoardAsString(Perspective.WHITE));
     }
 
 }

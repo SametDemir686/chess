@@ -1,5 +1,7 @@
 package chess.match;
 
+import java.util.Optional;
+
 public enum A1Notation {
     A1('A', '1', 0, 0),
     A2('A', '2', 0, 1),
@@ -158,5 +160,37 @@ public enum A1Notation {
         A1Notation up = up();
         if (up == null) return null;
         return up.left();
+    }
+
+    public A1Notation upUpRight() {
+        return Optional.of(this).map(A1Notation::upRight).map(A1Notation::up).orElse(null);
+    }
+
+    public A1Notation upRightRight() {
+        return Optional.of(this).map(A1Notation::upRight).map(A1Notation::right).orElse(null);
+    }
+
+    public A1Notation upUpLeft() {
+        return Optional.of(this).map(A1Notation::upLeft).map(A1Notation::up).orElse(null);
+    }
+
+    public A1Notation upLeftLeft() {
+        return Optional.of(this).map(A1Notation::upLeft).map(A1Notation::left).orElse(null);
+    }
+
+    public A1Notation downDownRight() {
+        return Optional.of(this).map(A1Notation::downRight).map(A1Notation::down).orElse(null);
+    }
+
+    public A1Notation downRightRight() {
+        return Optional.of(this).map(A1Notation::downRight).map(A1Notation::right).orElse(null);
+    }
+
+    public A1Notation downDownLeft() {
+        return Optional.of(this).map(A1Notation::downLeft).map(A1Notation::down).orElse(null);
+    }
+
+    public A1Notation downLeftLeft() {
+        return Optional.of(this).map(A1Notation::downLeft).map(A1Notation::left).orElse(null);
     }
 }

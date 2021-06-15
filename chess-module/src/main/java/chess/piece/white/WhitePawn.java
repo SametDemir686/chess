@@ -1,13 +1,17 @@
 package chess.piece.white;
 
-import chess.match.Board;
+import chess.board.Board;
+import chess.match.A1Notation;
 import chess.match.Direction;
 import chess.piece.Pawn;
 
+import java.util.function.UnaryOperator;
+import java.util.stream.Stream;
+
 public class WhitePawn extends Pawn implements WhitePiece {
 
-    public WhitePawn(Board board) {
-        super(board);
+    public WhitePawn() {
+        super();
     }
 
     public WhitePawn(WhitePawn whitePawn, Board board) {
@@ -20,7 +24,7 @@ public class WhitePawn extends Pawn implements WhitePiece {
 
     @Override
     public String toString() {
-        return "WP";
+        return "♙";
     }
 
 
@@ -45,4 +49,8 @@ public class WhitePawn extends Pawn implements WhitePiece {
         return new WhitePawn(this, board);
     }
 
+    @Override
+    public Stream<UnaryOperator<A1Notation>> getAllPossibleDirections() {
+        return Stream.of(A1Notation::upLeft, A1Notation::up, A1Notation::upRight);
+    }
 }

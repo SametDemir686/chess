@@ -1,11 +1,11 @@
 package chess.piece.white;
 
-import chess.match.Board;
+import chess.board.Board;
 import chess.piece.Rook;
 
 public class WhiteRook extends Rook implements WhitePiece {
-    public WhiteRook(Board board) {
-        super(board);
+    public WhiteRook() {
+        super();
     }
 
     public WhiteRook(WhiteRook whiteRook, Board board) {
@@ -18,7 +18,7 @@ public class WhiteRook extends Rook implements WhitePiece {
 
     @Override
     public String toString() {
-        return "WR";
+        return "♖";
     }
 
     @Override

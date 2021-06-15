@@ -1,14 +1,18 @@
 package chess.piece;
 
+import chess.board.Board;
 import chess.match.A1Notation;
-import chess.match.Board;
 import chess.match.Direction;
+import chess.util.DirectionUtil;
+import chess.util.Sets;
+
+import java.util.Set;
 
 import static chess.util.DirectionUtil.findDirection;
 
 public abstract class Bishop extends AbstractPiece {
-    protected Bishop(Board board) {
-        super(board);
+    protected Bishop() {
+        super();
     }
 
     protected Bishop(Bishop bishop) {
@@ -44,4 +48,13 @@ public abstract class Bishop extends AbstractPiece {
         return canTreathen(direction);
     }
 
+    @Override
+    public Set<A1Notation> getAllPossibleSquares() {
+        return Sets.union(
+                DirectionUtil.allPositionsInDirection(position, A1Notation::upLeft),
+                DirectionUtil.allPositionsInDirection(position, A1Notation::downLeft),
+                DirectionUtil.allPositionsInDirection(position, A1Notation::upRight),
+                DirectionUtil.allPositionsInDirection(position, A1Notation::downRight)
+        );
+    }
 }

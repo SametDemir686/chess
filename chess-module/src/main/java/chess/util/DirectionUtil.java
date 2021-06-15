@@ -3,6 +3,10 @@ package chess.util;
 import chess.match.A1Notation;
 import chess.match.Direction;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.UnaryOperator;
 
 import static chess.match.Direction.*;
@@ -65,4 +69,26 @@ public class DirectionUtil {
         return vertice * vertice + horizon * horizon;
     }
 
+    public static Set<A1Notation> allPositionsInDirection(A1Notation from, UnaryOperator<A1Notation> director) {
+        A1Notation current = director.apply(from);
+        Set<A1Notation> result = new HashSet<>();
+        while (current != null) {
+            result.add(current);
+            current = director.apply(current);
+        }
+        return result;
+    }
+
+    public static List<UnaryOperator<A1Notation>> getAllDirections() {
+        return Arrays.asList(
+                A1Notation::upLeft,
+                A1Notation::up,
+                A1Notation::upRight,
+                A1Notation::right,
+                A1Notation::downRight,
+                A1Notation::down,
+                A1Notation::downLeft,
+                A1Notation::left
+        );
+    }
 }

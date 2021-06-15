@@ -1,12 +1,12 @@
 package chess.piece.white;
 
-import chess.match.Board;
+import chess.board.Board;
 import chess.piece.Bishop;
 
 public class WhiteBishop extends Bishop implements WhitePiece {
 
-    public WhiteBishop(Board board) {
-        super(board);
+    public WhiteBishop() {
+        super();
     }
 
     public WhiteBishop(WhiteBishop whiteBishop, Board board) {
@@ -19,7 +19,7 @@ public class WhiteBishop extends Bishop implements WhitePiece {
 
     @Override
     public String toString() {
-        return "WB";
+        return "♗";
     }
 
     @Override

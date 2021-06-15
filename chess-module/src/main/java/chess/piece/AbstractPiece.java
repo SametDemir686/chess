@@ -1,7 +1,7 @@
 package chess.piece;
 
+import chess.board.Board;
 import chess.match.A1Notation;
-import chess.match.Board;
 import chess.match.Direction;
 
 import java.util.function.UnaryOperator;
@@ -15,8 +15,7 @@ public abstract class AbstractPiece implements Piece {
     protected boolean active = true;
     protected boolean moved = false;
 
-    protected AbstractPiece(Board board) {
-        this.board = board;
+    protected AbstractPiece() {
     }
 
     protected AbstractPiece(AbstractPiece piece) {
@@ -28,6 +27,11 @@ public abstract class AbstractPiece implements Piece {
     protected AbstractPiece(AbstractPiece piece, Board board) {
         this(piece);
         this.board = board;
+    }
+
+    protected AbstractPiece(A1Notation position) {
+        this();
+        this.position = position;
     }
 
     @Override
@@ -42,8 +46,8 @@ public abstract class AbstractPiece implements Piece {
 
     @Override
     public boolean canMoveTo(A1Notation newPosition) {
-        return !board.willThereBeCheckIfMoves(this.position, newPosition)
-                && isNotOccupiedByAllyPiece(newPosition);
+        return isNotOccupiedByAllyPiece(newPosition)
+                && !board.willThereBeCheckIfMoves(this.position, newPosition);
     }
 
     public boolean hasMoved() {

@@ -1,5 +1,6 @@
 package chess.piece.black;
 
+import chess.board.Board;
 import chess.piece.Piece;
 
 public interface BlackPiece extends Piece {
@@ -13,4 +14,11 @@ public interface BlackPiece extends Piece {
     default boolean isWhite() {
         return false;
     }
+
+    @Override
+    default BlackPiece copy() {
+        return copyToBoard(null);
+    }
+
+    BlackPiece copyToBoard(Board board);
 }

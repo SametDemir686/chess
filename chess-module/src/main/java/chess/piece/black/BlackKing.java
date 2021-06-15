@@ -1,12 +1,13 @@
 package chess.piece.black;
 
-import chess.match.Board;
+import chess.board.Board;
+import chess.match.A1Notation;
 import chess.piece.King;
 
 public class BlackKing extends King implements BlackPiece {
 
-    public BlackKing(Board board) {
-        super(board);
+    public BlackKing() {
+        super();
     }
 
     public BlackKing(BlackKing king) {
@@ -17,9 +18,13 @@ public class BlackKing extends King implements BlackPiece {
         super(blackKing, board);
     }
 
+    public BlackKing(A1Notation position, Board board) {
+        super(position, board);
+    }
+
     @Override
     public String toString() {
-        return "BK";
+        return "♚";
     }
 
     @Override

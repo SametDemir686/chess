@@ -1,11 +1,12 @@
 package chess.piece.white;
 
-import chess.match.Board;
+import chess.board.Board;
+import chess.match.A1Notation;
 import chess.piece.King;
 
 public class WhiteKing extends King implements WhitePiece {
-    public WhiteKing(Board board) {
-        super(board);
+    public WhiteKing() {
+        super();
     }
 
     public WhiteKing(WhiteKing whiteKing, Board board) {
@@ -16,9 +17,13 @@ public class WhiteKing extends King implements WhitePiece {
         super(king);
     }
 
+    public WhiteKing(A1Notation position, Board board) {
+        super(position, board);
+    }
+
     @Override
     public String toString() {
-        return "WK";
+        return "♔";
     }
 
     @Override

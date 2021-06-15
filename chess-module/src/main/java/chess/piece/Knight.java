@@ -1,22 +1,28 @@
 package chess.piece;
 
+import chess.board.Board;
 import chess.match.A1Notation;
-import chess.match.Board;
 import chess.match.Direction;
+
+import java.util.Objects;
+import java.util.Set;
+import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.lang.Math.abs;
 
 public abstract class Knight extends AbstractPiece {
 
-    protected Knight(Board board) {
-        super(board);
+    protected Knight() {
+        super();
     }
 
-    public Knight(Knight knight) {
+    protected Knight(Knight knight) {
         super(knight);
     }
 
-    public Knight(Knight knight, Board board) {
+    protected Knight(Knight knight, Board board) {
         super(knight, board);
     }
 
@@ -39,4 +45,23 @@ public abstract class Knight extends AbstractPiece {
                 || horDiff == 1 && verDiff == 2;
     }
 
+    @Override
+    public Set<A1Notation> getAllPossibleSquares() {
+        return getAllPossibleDirections()
+                .map(s -> s.apply(position))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+    }
+
+    private Stream<UnaryOperator<A1Notation>> getAllPossibleDirections() {
+        return Stream.of(
+                A1Notation::upUpRight,
+                A1Notation::upRightRight,
+                A1Notation::upUpLeft,
+                A1Notation::upLeftLeft,
+                A1Notation::downDownRight,
+                A1Notation::downRightRight,
+                A1Notation::downDownLeft,
+                A1Notation::downLeftLeft);
+    }
 }

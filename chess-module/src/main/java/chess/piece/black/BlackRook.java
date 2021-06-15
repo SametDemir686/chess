@@ -1,12 +1,12 @@
 package chess.piece.black;
 
-import chess.match.Board;
+import chess.board.Board;
 import chess.piece.Rook;
 
 public class BlackRook extends Rook implements BlackPiece {
 
-    public BlackRook(Board board) {
-        super(board);
+    public BlackRook() {
+        super();
     }
 
     public BlackRook(BlackRook rook) {
@@ -19,7 +19,7 @@ public class BlackRook extends Rook implements BlackPiece {
 
     @Override
     public String toString() {
-        return "BR";
+        return "♜";
     }
 
     @Override

@@ -1,12 +1,12 @@
 package chess.piece.black;
 
-import chess.match.Board;
+import chess.board.Board;
 import chess.piece.Queen;
 
 public class BlackQueen extends Queen implements BlackPiece {
 
-    public BlackQueen(Board board) {
-        super(board);
+    public BlackQueen() {
+        super();
     }
 
     public BlackQueen(BlackQueen queen) {
@@ -19,7 +19,7 @@ public class BlackQueen extends Queen implements BlackPiece {
 
     @Override
     public String toString() {
-        return "BQ";
+        return "♛";
     }
 
     @Override
