@@ -27,7 +27,6 @@ public class WhitePawn extends Pawn implements WhitePiece {
         return "♙";
     }
 
-
     @Override
     public boolean canMove(Direction direction) {
         return direction == Direction.UP;
