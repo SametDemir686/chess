@@ -2,6 +2,7 @@ package chess.player;
 
 import chess.match.A1Notation;
 import chess.piece.King;
+import chess.piece.NullPiece;
 import chess.piece.Piece;
 
 import java.util.ArrayList;
@@ -27,6 +28,20 @@ public abstract class AbstractPlayer<P extends Piece, K extends King> implements
     @Override
     public boolean remove(P piece) {
         return pieces.remove(piece);
+    }
+
+    @Override
+    public Piece getPieceAt(A1Notation position) {
+        return pieces.stream()
+                .filter(s -> s.getPosition() == position)
+                .findAny()
+                .map(Piece.class::cast)
+                .orElse(new NullPiece());
+    }
+
+    @Override
+    public void removeAllPieces() {
+        pieces.clear();
     }
 
     public List<P> getAllActivePieces() {

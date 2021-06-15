@@ -10,28 +10,46 @@ import chess.player.BlackPlayer;
 import chess.player.Player;
 import chess.player.WhitePlayer;
 
+import static chess.match.A1Notation.*;
+
 public abstract class AbstractClassicBoard implements Board {
     public static final int BOARD_SIZE = 8;
-    protected Piece[][] board = new Piece[BOARD_SIZE][BOARD_SIZE];
     protected boolean whitesTurn = true;
     protected Player<WhitePiece> whitePlayer = new WhitePlayer();
     protected Player<BlackPiece> blackPlayer = new BlackPlayer();
 
+    private static A1Notation[][] boardPositions = new A1Notation[][]{
+            {A1, A2, A3, A4, A5, A6, A7, A8},
+            {B1, B2, B3, B4, B5, B6, B7, B8},
+            {C1, C2, C3, C4, C5, C6, C7, C8},
+            {D1, D2, D3, D4, D5, D6, D7, D8},
+            {E1, E2, E3, E4, E5, E6, E7, E8},
+            {F1, F2, F3, F4, F5, F6, F7, F8},
+            {G1, G2, G3, G4, G5, G6, G7, G8},
+            {H1, H2, H3, H4, H5, H6, H7, H8},
+    };
+
     public PieceDTO[][] getBoardDTO() {
-        PieceDTO[][] result = new PieceDTO[board.length][board[0].length];
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                result[i][j] = new PieceDTO(board[i][j]);
+        PieceDTO[][] result = new PieceDTO[BOARD_SIZE][BOARD_SIZE];
+        for (int i = 0; i < boardPositions.length; i++) {
+            for (int j = 0; j < boardPositions[i].length; j++) {
+                result[i][j] = new PieceDTO(getPieceAt(boardPositions[i][j]));
             }
         }
         return result;
     }
 
+    public Piece getPieceAt(A1Notation position) {
+        return whitePlayer.hasPieceAt(position)
+                ? whitePlayer.getPieceAt(position)
+                : blackPlayer.getPieceAt(position);
+    }
+
     public Piece[][] getBoard() {
-        Piece[][] result = new Piece[board.length][board[0].length];
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                result[i][j] = board[i][j].copy();
+        Piece[][] result = new Piece[BOARD_SIZE][BOARD_SIZE];
+        for (int i = 0; i < boardPositions.length; i++) {
+            for (int j = 0; j < boardPositions[i].length; j++) {
+                result[i][j] = getPieceAt(boardPositions[i][j]).copy();
             }
         }
         return result;
@@ -48,15 +66,11 @@ public abstract class AbstractClassicBoard implements Board {
     }
 
     public void removeAllPieces() {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                board[i][j] = new NullPiece();
-            }
-        }
+        whitePlayer.removeAllPieces();
+        blackPlayer.removeAllPieces();
     }
 
     protected void put(A1Notation position, Piece piece) {
-        board[position.getHorizontalIndex()][position.getVerticalIndex()] = piece;
         piece.setPosition(position);
         piece.setBoard(this);
     }
@@ -65,14 +79,6 @@ public abstract class AbstractClassicBoard implements Board {
         Piece pieceToBeRemoved = getPieceAt(position);
         put(position, new NullPiece());
         return pieceToBeRemoved;
-    }
-
-    public Piece getPieceAt(A1Notation a1Notation) {
-        return getPieceAt(a1Notation.getHorizontalIndex(), a1Notation.getVerticalIndex());
-    }
-
-    private Piece getPieceAt(int verticalIndex, int horizontalIndex) {
-        return board[verticalIndex][horizontalIndex];
     }
 
     @Override
@@ -245,7 +251,7 @@ public abstract class AbstractClassicBoard implements Board {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (Piece[] pieces : board) {
+        for (Piece[] pieces : getBoard()) {
             for (Piece piece : pieces) {
                 result.append(piece).append('\t');
             }
