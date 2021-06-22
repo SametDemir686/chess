@@ -83,10 +83,9 @@ public abstract class AbstractClassicBoard implements Board {
     }
 
     protected Move movePiece(Position piecePosition, Position moveTo) {
-        Piece movingPiece = remove(piecePosition);
-        Piece capturedPiece = remove(moveTo);
+        Piece movingPiece = getPieceAt(piecePosition);
+        Piece capturedPiece = getPieceAt(moveTo);
         capturedPiece.captured();
-        put(moveTo, movingPiece);
         movingPiece.move(moveTo);
         return new InvalidMove();
     }

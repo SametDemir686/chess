@@ -40,7 +40,7 @@ public abstract class Pawn extends AbstractPiece implements Promotable {
         int magnitudeSquare = findMagnitudeSquare(position, newPosition);
         if (canTreathen(direction) && magnitudeSquare == 2) {
             return isOccupiedByEnemyPiece(newPosition);
-        } else if (canMove(direction)) {
+        } else if (canMove(direction) && board.isEmpty(newPosition)) {
             if (!hasMoved()) return magnitudeSquare == 1 || magnitudeSquare == 4;
             return magnitudeSquare == 1;
         }
