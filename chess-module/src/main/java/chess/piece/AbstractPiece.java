@@ -2,6 +2,8 @@ package chess.piece;
 
 import chess.board.Board;
 import chess.match.Direction;
+import chess.move.InvalidMove;
+import chess.move.Move;
 import chess.notations.Position;
 
 import java.util.function.UnaryOperator;
@@ -46,7 +48,8 @@ public abstract class AbstractPiece implements Piece {
 
     @Override
     public boolean canMoveTo(Position newPosition) {
-        return isNotOccupiedByAllyPiece(newPosition)
+        return !isCaptured()
+                && isNotOccupiedByAllyPiece(newPosition)
                 && !board.willThereBeCheckIfMoves(this.position, newPosition);
     }
 
@@ -54,8 +57,14 @@ public abstract class AbstractPiece implements Piece {
         return moved;
     }
 
-    public void move() {
+    public Move move(Position to) {
         this.moved = true;
+        this.position = to;
+        return toMove(to);
+    }
+
+    protected Move toMove(Position moveTo) {
+        return new InvalidMove();
     }
 
     public boolean isActive() {
@@ -118,5 +127,10 @@ public abstract class AbstractPiece implements Piece {
             current = direction.apply(current);
         }
         return current;
+    }
+
+    public boolean distinguish(String distinguisher) {
+        if (distinguisher == null) return true;
+        return position.toString().contains(distinguisher.toUpperCase());
     }
 }

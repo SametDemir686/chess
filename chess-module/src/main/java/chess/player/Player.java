@@ -1,9 +1,7 @@
 package chess.player;
 
 import chess.notations.Position;
-import chess.piece.King;
-import chess.piece.NullPiece;
-import chess.piece.Piece;
+import chess.piece.*;
 
 import java.util.List;
 
@@ -31,4 +29,14 @@ public interface Player<P extends Piece> {
     }
 
     void removeAllPieces();
+
+    List<Pawn> getPawns();
+
+    List<Queen> getQueens();
+
+    List<Knight> getKnights();
+
+    List<Bishop> getBishops();
+
+    List<Rook> getRooks();
 }

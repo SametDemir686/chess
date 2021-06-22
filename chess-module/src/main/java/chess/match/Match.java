@@ -13,7 +13,7 @@ public class Match {
     private Board board = new ClassicBoard();
 
     public boolean move(Position from, Position to) {
-        return board.move(from, to);
+        return board.move(from, to) != null;
     }
 
     public PieceDTO[][] getBoard(Perspective perspective) {

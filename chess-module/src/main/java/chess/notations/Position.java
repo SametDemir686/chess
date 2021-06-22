@@ -94,6 +94,10 @@ public enum Position {
         };
     }
 
+    public static Position parse(String position) {
+        return valueOf(position.toUpperCase());
+    }
+
     public int getVerticalIndex() {
         return verticalIndex;
     }

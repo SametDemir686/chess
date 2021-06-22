@@ -2,6 +2,7 @@ package chess.piece;
 
 import chess.board.Board;
 import chess.match.Direction;
+import chess.move.Move;
 import chess.notations.Position;
 
 import java.util.Set;
@@ -18,7 +19,7 @@ public interface Piece {
 
     boolean isWhite();
 
-    void move();
+    Move move(Position moveTo);
 
     boolean canTreathen(Direction direction);
 
@@ -64,4 +65,5 @@ public interface Piece {
         return false;
     }
 
+    boolean distinguish(String distinguisher);
 }

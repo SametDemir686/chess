@@ -1,6 +1,7 @@
 package chess.notations;
 
 
+import chess.move.whitesmove.WhitesMove;
 import chess.piece.white.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;

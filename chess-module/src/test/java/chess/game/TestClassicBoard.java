@@ -60,9 +60,9 @@ public class TestClassicBoard {
     @Test
     public void when_D4_D5_then_pawn_can_capture_on_D5() {
         Board board = new ClassicBoard();
-        assertTrue(board.move(D2, D4));
-        assertTrue(board.move(D7, D5));
-        assertTrue(board.move(D4, D5));
+        assertNotNull(board.move(D2, D4));
+        assertNotNull(board.move(D7, D5));
+        assertNotNull(board.move(D4, D5));
         assertTrue(board.isOccupiedByWhitePiece(D5));
         assertTrue(board.isEmpty(D4));
     }
@@ -73,7 +73,7 @@ public class TestClassicBoard {
         board.putWhiteKing(C5);
         board.putBlackKing(E5);
 
-        assertFalse(board.move(C5, D5));
+        assertNull(board.move(C5, D5));
 
         assertEquals(C5, board.getWhitesKingPosition());
         assertEquals(E5, board.getBlacksKingPosition());

@@ -1,5 +1,7 @@
 package chess.board;
 
+import chess.move.InvalidMove;
+import chess.move.Move;
 import chess.notations.Perspective;
 import chess.notations.Position;
 import chess.piece.NullPiece;
@@ -36,13 +38,12 @@ public abstract class AbstractClassicBoard implements Board {
     }
 
     @Override
-    public boolean move(Position piecePosition, Position moveTo) {
+    public Move move(Position piecePosition, Position moveTo) {
         if (canMove(piecePosition, moveTo)) {
             whitesTurn = !whitesTurn;
-            movePiece(piecePosition, moveTo);
-            return true;
+            return movePiece(piecePosition, moveTo);
         }
-        return false;
+        return null;
     }
 
     public void removeAllPieces() {
@@ -81,12 +82,13 @@ public abstract class AbstractClassicBoard implements Board {
         return getPieceAt(position).isBlack();
     }
 
-    protected void movePiece(Position piecePosition, Position moveTo) {
+    protected Move movePiece(Position piecePosition, Position moveTo) {
         Piece movingPiece = remove(piecePosition);
         Piece capturedPiece = remove(moveTo);
         capturedPiece.captured();
         put(moveTo, movingPiece);
-        movingPiece.move();
+        movingPiece.move(moveTo);
+        return new InvalidMove();
     }
 
     @Override

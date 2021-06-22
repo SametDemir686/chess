@@ -1,5 +1,6 @@
-package chess.notations;
+package chess.move.whitesmove;
 
+import chess.notations.Position;
 import chess.piece.Piece;
 import chess.piece.white.*;
 

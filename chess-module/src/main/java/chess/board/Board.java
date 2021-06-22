@@ -1,5 +1,6 @@
 package chess.board;
 
+import chess.move.Move;
 import chess.notations.Perspective;
 import chess.notations.Position;
 import chess.piece.Piece;
@@ -11,7 +12,7 @@ public interface Board {
 
     boolean canMove(Position piecePosition, Position newPosition);
 
-    boolean move(Position piecePosition, Position moveTo);
+    Move move(Position piecePosition, Position moveTo);
 
     boolean isStaleMate();
 
