@@ -66,4 +66,6 @@ public interface Piece {
     }
 
     boolean distinguish(String distinguisher);
+
+    boolean hasMoved();
 }

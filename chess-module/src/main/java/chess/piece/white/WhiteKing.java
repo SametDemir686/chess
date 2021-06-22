@@ -9,6 +9,25 @@ public class WhiteKing extends King implements WhitePiece {
         super();
     }
 
+    public WhiteKing(Position position, Board board) {
+        super(position);
+    }
+
+    @Override
+    public boolean canShortCastle() {
+        return board.canWhiteShortCastle();
+    }
+
+    @Override
+    public boolean canLongCastle() {
+        return board.canWhiteLongCastle();
+    }
+
+    @Override
+    public boolean isShortCastling(Position newPosition) {
+        return newPosition == Position.G1;
+    }
+
     public WhiteKing(WhiteKing whiteKing, Board board) {
         super(whiteKing, board);
     }
@@ -17,8 +36,9 @@ public class WhiteKing extends King implements WhitePiece {
         super(king);
     }
 
-    public WhiteKing(Position position, Board board) {
-        super(position, board);
+    @Override
+    public boolean isLongCastling(Position newPosition) {
+        return newPosition == Position.C1;
     }
 
     @Override

@@ -25,16 +25,26 @@ public abstract class King extends AbstractPiece {
         super(king, board);
     }
 
-    protected King(Position position, Board board) {
+    protected King(Position position) {
         super(position);
     }
 
     @Override
     public boolean canMoveTo(Position newPosition) {
-        return super.canMoveTo(newPosition)
-                && hasALookAt(newPosition)
-                && !isTreathenedByEnemyPiece(newPosition);
+        if (!super.canMoveTo(newPosition)) return false;
+        if (isLongCastling(newPosition) && canLongCastle()) return true;
+        if (isShortCastling(newPosition) && canShortCastle()) return true;
+        if (!hasALookAt(newPosition)) return false;
+        return !isTreathenedByEnemyPiece(newPosition);
     }
+
+    public abstract boolean canShortCastle();
+
+    public abstract boolean canLongCastle();
+
+    public abstract boolean isShortCastling(Position newPosition);
+
+    public abstract boolean isLongCastling(Position newPosition);
 
     @Override
     public boolean canTreathen(Direction direction) {
@@ -61,4 +71,8 @@ public abstract class King extends AbstractPiece {
                 .collect(Collectors.toSet());
     }
 
+    public boolean isCastling(Position moveTo) {
+        return isShortCastling(moveTo) && canShortCastle()
+                || isLongCastling(moveTo) && canLongCastle();
+    }
 }

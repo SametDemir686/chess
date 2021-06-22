@@ -53,6 +53,7 @@ public abstract class AbstractPiece implements Piece {
                 && !board.willThereBeCheckIfMoves(this.position, newPosition);
     }
 
+    @Override
     public boolean hasMoved() {
         return moved;
     }
@@ -60,10 +61,6 @@ public abstract class AbstractPiece implements Piece {
     public Move move(Position to) {
         this.moved = true;
         this.position = to;
-        return toMove(to);
-    }
-
-    protected Move toMove(Position moveTo) {
         return new InvalidMove();
     }
 

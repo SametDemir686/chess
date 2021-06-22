@@ -10,6 +10,25 @@ public class BlackKing extends King implements BlackPiece {
         super();
     }
 
+    public BlackKing(Position position) {
+        super(position);
+    }
+
+    @Override
+    public boolean canShortCastle() {
+        return board.canBlackShortCastle();
+    }
+
+    @Override
+    public boolean canLongCastle() {
+        return board.canBlackLongCastle();
+    }
+
+    @Override
+    public boolean isShortCastling(Position newPosition) {
+        return newPosition == Position.G8;
+    }
+
     public BlackKing(BlackKing king) {
         super(king);
     }
@@ -18,8 +37,9 @@ public class BlackKing extends King implements BlackPiece {
         super(blackKing, board);
     }
 
-    public BlackKing(Position position, Board board) {
-        super(position, board);
+    @Override
+    public boolean isLongCastling(Position newPosition) {
+        return newPosition == Position.C8;
     }
 
     @Override

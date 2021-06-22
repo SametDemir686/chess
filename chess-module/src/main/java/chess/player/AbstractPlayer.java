@@ -26,19 +26,14 @@ public abstract class AbstractPlayer<P extends Piece, K extends King> implements
 
     @Override
     public void add(Position position, P piece) {
-        if (piece instanceof King) {
-            setKing((K) piece);
-        } else if (piece instanceof Queen) {
-            queens.add((Queen) piece);
-        } else if (piece instanceof Knight) {
-            knights.add((Knight) piece);
-        } else if (piece instanceof Bishop) {
-            bishops.add((Bishop) piece);
-        } else if (piece instanceof Rook) {
-            rooks.add((Rook) piece);
-        } else if (piece instanceof Pawn) {
-            pawns.add((Pawn) piece);
-        }
+        if (piece instanceof King) setKing((K) piece);
+        else if (piece instanceof Queen) queens.add((Queen) piece);
+        else if (piece instanceof Knight) knights.add((Knight) piece);
+        else if (piece instanceof Bishop) bishops.add((Bishop) piece);
+        else if (piece instanceof Rook) rooks.add((Rook) piece);
+        else if (piece instanceof Pawn) pawns.add((Pawn) piece);
+        else throw new IllegalArgumentException(piece.getClass().toString());
+        piece.setPosition(position);
     }
 
     @Override
@@ -75,6 +70,7 @@ public abstract class AbstractPlayer<P extends Piece, K extends King> implements
         bishops.clear();
         rooks.clear();
         pawns.clear();
+        king = null;
     }
 
     public List<P> getAllActivePieces() {

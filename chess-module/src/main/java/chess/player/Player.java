@@ -39,4 +39,12 @@ public interface Player<P extends Piece> {
     List<Bishop> getBishops();
 
     List<Rook> getRooks();
+
+    boolean canLongCastle();
+
+    boolean canShortCastle();
+
+    void castleLong();
+
+    void castleShort();
 }

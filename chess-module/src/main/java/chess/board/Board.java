@@ -76,4 +76,11 @@ public interface Board {
 
     Piece[][] getBoard(Perspective perspective);
 
+    boolean canBlackLongCastle();
+
+    boolean canWhiteLongCastle();
+
+    boolean canBlackShortCastle();
+
+    boolean canWhiteShortCastle();
 }
