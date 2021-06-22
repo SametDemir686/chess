@@ -1,7 +1,7 @@
 package chess.piece.white;
 
 import chess.board.Board;
-import chess.match.A1Notation;
+import chess.notations.Position;
 import chess.piece.King;
 
 public class WhiteKing extends King implements WhitePiece {
@@ -17,7 +17,7 @@ public class WhiteKing extends King implements WhitePiece {
         super(king);
     }
 
-    public WhiteKing(A1Notation position, Board board) {
+    public WhiteKing(Position position, Board board) {
         super(position, board);
     }
 

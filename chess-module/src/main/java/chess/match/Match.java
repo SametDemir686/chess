@@ -2,6 +2,8 @@ package chess.match;
 
 import chess.board.Board;
 import chess.board.ClassicBoard;
+import chess.notations.Perspective;
+import chess.notations.Position;
 import chess.piece.Piece;
 import chess.piece.PieceDTO;
 
@@ -10,7 +12,7 @@ import static chess.board.AbstractClassicBoard.BOARD_SIZE;
 public class Match {
     private Board board = new ClassicBoard();
 
-    public boolean move(A1Notation from, A1Notation to) {
+    public boolean move(Position from, Position to) {
         return board.move(from, to);
     }
 

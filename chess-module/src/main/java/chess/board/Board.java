@@ -1,7 +1,7 @@
 package chess.board;
 
-import chess.match.A1Notation;
-import chess.match.Perspective;
+import chess.notations.Perspective;
+import chess.notations.Position;
 import chess.piece.Piece;
 import chess.piece.black.BlackPiece;
 import chess.piece.white.WhitePiece;
@@ -9,33 +9,33 @@ import chess.piece.white.WhitePiece;
 public interface Board {
     void resetBoard();
 
-    boolean canMove(A1Notation piecePosition, A1Notation newPosition);
+    boolean canMove(Position piecePosition, Position newPosition);
 
-    boolean move(A1Notation piecePosition, A1Notation moveTo);
+    boolean move(Position piecePosition, Position moveTo);
 
     boolean isStaleMate();
 
-    boolean willThereBeCheckIfMoves(A1Notation position, A1Notation newPosition);
+    boolean willThereBeCheckIfMoves(Position position, Position newPosition);
 
-    Piece getPieceAt(A1Notation position);
+    Piece getPieceAt(Position position);
 
-    boolean isThreatenedByBlack(A1Notation position);
+    boolean isThreatenedByBlack(Position position);
 
-    boolean isThreatenedByWhite(A1Notation position);
+    boolean isThreatenedByWhite(Position position);
 
-    A1Notation getBlacksKingPosition();
+    Position getBlacksKingPosition();
 
-    A1Notation getWhitesKingPosition();
+    Position getWhitesKingPosition();
 
-    boolean isEmpty(A1Notation current);
+    boolean isEmpty(Position current);
 
-    boolean isOccupiedByBlackPiece(A1Notation position);
+    boolean isOccupiedByBlackPiece(Position position);
 
-    void putBlackPiece(A1Notation position, BlackPiece piece);
+    void putBlackPiece(Position position, BlackPiece piece);
 
-    void putWhitePiece(A1Notation position, WhitePiece piece);
+    void putWhitePiece(Position position, WhitePiece piece);
 
-    boolean isOccupiedByWhitePiece(A1Notation position);
+    boolean isOccupiedByWhitePiece(Position position);
 
     boolean isWhiteChecked();
 
@@ -49,29 +49,29 @@ public interface Board {
 
     boolean isCheckMate();
 
-    void putBlackPawn(A1Notation position);
+    void putBlackPawn(Position position);
 
-    void putBlackQueen(A1Notation position);
+    void putBlackQueen(Position position);
 
-    void putBlackBishop(A1Notation position);
+    void putBlackBishop(Position position);
 
-    void putBlackKnight(A1Notation position);
+    void putBlackKnight(Position position);
 
-    void putBlackRook(A1Notation position);
+    void putBlackRook(Position position);
 
-    void putBlackKing(A1Notation position);
+    void putBlackKing(Position position);
 
-    void putWhitePawn(A1Notation position);
+    void putWhitePawn(Position position);
 
-    void putWhiteQueen(A1Notation position);
+    void putWhiteQueen(Position position);
 
-    void putWhiteBishop(A1Notation position);
+    void putWhiteBishop(Position position);
 
-    void putWhiteKnight(A1Notation position);
+    void putWhiteKnight(Position position);
 
-    void putWhiteRook(A1Notation position);
+    void putWhiteRook(Position position);
 
-    void putWhiteKing(A1Notation position);
+    void putWhiteKing(Position position);
 
     Piece[][] getBoard(Perspective perspective);
 

@@ -1,7 +1,7 @@
 package chess.board;
 
-import chess.match.A1Notation;
-import chess.match.Perspective;
+import chess.notations.Perspective;
+import chess.notations.Position;
 import chess.piece.NullPiece;
 import chess.piece.Piece;
 import chess.piece.black.*;
@@ -18,7 +18,7 @@ public abstract class AbstractClassicBoard implements Board {
 
     @Override
     public Piece[][] getBoard(Perspective perspective) {
-        A1Notation[][] positions = perspective.getPositions();
+        Position[][] positions = perspective.getPositions();
         Piece[][] result = new Piece[BOARD_SIZE][BOARD_SIZE];
         for (int i = 0; i < positions.length; i++) {
             for (int j = 0; j < positions[i].length; j++) {
@@ -29,14 +29,14 @@ public abstract class AbstractClassicBoard implements Board {
     }
 
     @Override
-    public Piece getPieceAt(A1Notation position) {
+    public Piece getPieceAt(Position position) {
         return whitePlayer.hasPieceAt(position)
                 ? whitePlayer.getPieceAt(position)
                 : blackPlayer.getPieceAt(position);
     }
 
     @Override
-    public boolean move(A1Notation piecePosition, A1Notation moveTo) {
+    public boolean move(Position piecePosition, Position moveTo) {
         if (canMove(piecePosition, moveTo)) {
             whitesTurn = !whitesTurn;
             movePiece(piecePosition, moveTo);
@@ -50,38 +50,38 @@ public abstract class AbstractClassicBoard implements Board {
         blackPlayer.removeAllPieces();
     }
 
-    protected void put(A1Notation position, Piece piece) {
+    protected void put(Position position, Piece piece) {
         piece.setPosition(position);
         piece.setBoard(this);
     }
 
-    public Piece remove(A1Notation position) {
+    public Piece remove(Position position) {
         Piece pieceToBeRemoved = getPieceAt(position);
         put(position, new NullPiece());
         return pieceToBeRemoved;
     }
 
     @Override
-    public void putBlackPiece(A1Notation position, BlackPiece piece) {
+    public void putBlackPiece(Position position, BlackPiece piece) {
         put(position, piece);
         blackPlayer.add(position, piece);
     }
 
     @Override
-    public void putWhitePiece(A1Notation position, WhitePiece piece) {
+    public void putWhitePiece(Position position, WhitePiece piece) {
         put(position, piece);
         whitePlayer.add(position, piece);
     }
 
-    public boolean isOccupiedByWhitePiece(A1Notation position) {
+    public boolean isOccupiedByWhitePiece(Position position) {
         return getPieceAt(position).isWhite();
     }
 
-    public boolean isOccupiedByBlackPiece(A1Notation position) {
+    public boolean isOccupiedByBlackPiece(Position position) {
         return getPieceAt(position).isBlack();
     }
 
-    protected void movePiece(A1Notation piecePosition, A1Notation moveTo) {
+    protected void movePiece(Position piecePosition, Position moveTo) {
         Piece movingPiece = remove(piecePosition);
         Piece capturedPiece = remove(moveTo);
         capturedPiece.captured();
@@ -90,41 +90,41 @@ public abstract class AbstractClassicBoard implements Board {
     }
 
     @Override
-    public A1Notation getBlacksKingPosition() {
+    public Position getBlacksKingPosition() {
         return blackPlayer.getKingsPosition();
     }
 
     @Override
-    public A1Notation getWhitesKingPosition() {
+    public Position getWhitesKingPosition() {
         return whitePlayer.getKingsPosition();
     }
 
-    public boolean isEmpty(A1Notation position) {
+    public boolean isEmpty(Position position) {
         return getPieceAt(position) instanceof NullPiece;
     }
 
-    public boolean isNotEmpty(A1Notation position) {
+    public boolean isNotEmpty(Position position) {
         return !isEmpty(position);
     }
 
-    public boolean isThreatenedByBlack(A1Notation position) {
+    public boolean isThreatenedByBlack(Position position) {
         return blackPlayer.getAllActivePieces().stream().anyMatch(piece -> piece.threatens(position));
     }
 
-    public boolean isThreatenedByWhite(A1Notation position) {
+    public boolean isThreatenedByWhite(Position position) {
         return whitePlayer.getAllActivePieces().stream().anyMatch(piece -> piece.threatens(position));
     }
 
     @Override
     public boolean isWhiteChecked() {
-        A1Notation whitesKingPosition = getWhitesKingPosition();
+        Position whitesKingPosition = getWhitesKingPosition();
         return blackPlayer.getAllActivePieces().stream()
                 .anyMatch(piece -> piece.threatens(whitesKingPosition));
     }
 
     @Override
     public boolean isBlackedChecked() {
-        A1Notation blacksKingPosition = getBlacksKingPosition();
+        Position blacksKingPosition = getBlacksKingPosition();
         return whitePlayer.getAllActivePieces().stream()
                 .anyMatch(piece -> piece.threatens(blacksKingPosition));
     }
@@ -155,7 +155,7 @@ public abstract class AbstractClassicBoard implements Board {
     }
 
     @Override
-    public boolean willThereBeCheckIfMoves(A1Notation from, A1Notation to) {
+    public boolean willThereBeCheckIfMoves(Position from, Position to) {
         if (from == null || to == null) return false;
         if (isEmpty(from)) return false;
         HelperBoard helperBoard = new HelperBoard(whitePlayer, blackPlayer);
@@ -164,62 +164,62 @@ public abstract class AbstractClassicBoard implements Board {
     }
 
     @Override
-    public void putBlackPawn(A1Notation position) {
+    public void putBlackPawn(Position position) {
         putBlackPiece(position, new BlackPawn());
     }
 
     @Override
-    public void putBlackQueen(A1Notation position) {
+    public void putBlackQueen(Position position) {
         putBlackPiece(position, new BlackQueen());
     }
 
     @Override
-    public void putBlackBishop(A1Notation position) {
+    public void putBlackBishop(Position position) {
         putBlackPiece(position, new BlackBishop());
     }
 
     @Override
-    public void putBlackKnight(A1Notation position) {
+    public void putBlackKnight(Position position) {
         putBlackPiece(position, new BlackKnight());
     }
 
     @Override
-    public void putBlackRook(A1Notation position) {
+    public void putBlackRook(Position position) {
         putBlackPiece(position, new BlackRook());
     }
 
     @Override
-    public void putBlackKing(A1Notation position) {
+    public void putBlackKing(Position position) {
         putBlackPiece(position, new BlackKing());
     }
 
     @Override
-    public void putWhitePawn(A1Notation position) {
+    public void putWhitePawn(Position position) {
         putWhitePiece(position, new WhitePawn());
     }
 
     @Override
-    public void putWhiteQueen(A1Notation position) {
+    public void putWhiteQueen(Position position) {
         putWhitePiece(position, new WhiteQueen());
     }
 
     @Override
-    public void putWhiteBishop(A1Notation position) {
+    public void putWhiteBishop(Position position) {
         putWhitePiece(position, new WhiteBishop());
     }
 
     @Override
-    public void putWhiteKnight(A1Notation position) {
+    public void putWhiteKnight(Position position) {
         putWhitePiece(position, new WhiteKnight());
     }
 
     @Override
-    public void putWhiteRook(A1Notation position) {
+    public void putWhiteRook(Position position) {
         putWhitePiece(position, new WhiteRook());
     }
 
     @Override
-    public void putWhiteKing(A1Notation position) {
+    public void putWhiteKing(Position position) {
         putWhitePiece(position, new WhiteKing());
     }
 

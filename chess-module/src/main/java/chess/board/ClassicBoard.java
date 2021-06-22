@@ -1,8 +1,8 @@
 package chess.board;
 
-import chess.match.A1Notation;
+import chess.notations.Position;
 
-import static chess.match.A1Notation.*;
+import static chess.notations.Position.*;
 
 public class ClassicBoard extends AbstractClassicBoard {
 
@@ -57,14 +57,14 @@ public class ClassicBoard extends AbstractClassicBoard {
     }
 
     @Override
-    public boolean canMove(A1Notation piecePosition, A1Notation newPosition) {
+    public boolean canMove(Position piecePosition, Position newPosition) {
         return piecePosition != null
                 && piecePosition != newPosition
                 && isTurnValidToMoveThePieceAt(piecePosition)
                 && getPieceAt(piecePosition).canMoveTo(newPosition);
     }
 
-    private boolean isTurnValidToMoveThePieceAt(A1Notation piecePosition) {
+    private boolean isTurnValidToMoveThePieceAt(Position piecePosition) {
         return isOccupiedByWhitePiece(piecePosition) == whitesTurn;
     }
 

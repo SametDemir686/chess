@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static chess.match.A1Notation.*;
+import static chess.notations.Position.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestMatch {

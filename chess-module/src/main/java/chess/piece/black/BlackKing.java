@@ -1,7 +1,7 @@
 package chess.piece.black;
 
 import chess.board.Board;
-import chess.match.A1Notation;
+import chess.notations.Position;
 import chess.piece.King;
 
 public class BlackKing extends King implements BlackPiece {
@@ -18,7 +18,7 @@ public class BlackKing extends King implements BlackPiece {
         super(blackKing, board);
     }
 
-    public BlackKing(A1Notation position, Board board) {
+    public BlackKing(Position position, Board board) {
         super(position, board);
     }
 

@@ -1,8 +1,8 @@
 package chess.piece.black;
 
 import chess.board.Board;
-import chess.match.A1Notation;
 import chess.match.Direction;
+import chess.notations.Position;
 import chess.piece.Pawn;
 
 import java.util.function.UnaryOperator;
@@ -48,7 +48,7 @@ public class BlackPawn extends Pawn implements BlackPiece {
         return new BlackPawn(this, board);
     }
 
-    public Stream<UnaryOperator<A1Notation>> getAllPossibleDirections() {
-        return Stream.of(A1Notation::downLeft, A1Notation::down, A1Notation::downRight);
+    public Stream<UnaryOperator<Position>> getAllPossibleDirections() {
+        return Stream.of(Position::downLeft, Position::down, Position::downRight);
     }
 }

@@ -1,6 +1,6 @@
 package chess.board;
 
-import chess.match.A1Notation;
+import chess.notations.Position;
 import chess.piece.black.BlackPiece;
 import chess.piece.white.WhitePiece;
 import chess.player.Player;
@@ -31,7 +31,7 @@ public class FreeBoard extends AbstractClassicBoard {
     }
 
     @Override
-    public boolean canMove(A1Notation piecePosition, A1Notation newPosition) {
+    public boolean canMove(Position piecePosition, Position newPosition) {
         return getPieceAt(piecePosition).canMoveTo(newPosition);
     }
 

@@ -1,7 +1,7 @@
 package chess.util;
 
-import chess.match.A1Notation;
 import chess.match.Direction;
+import chess.notations.Position;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -16,24 +16,24 @@ public class DirectionUtil {
     private DirectionUtil() {
     }
 
-    public static UnaryOperator<A1Notation> parseToUnaryOperator(Direction direction) {
+    public static UnaryOperator<Position> parseToUnaryOperator(Direction direction) {
         switch (direction) {
             case UP:
-                return A1Notation::up;
+                return Position::up;
             case DOWN:
-                return A1Notation::down;
+                return Position::down;
             case LEFT:
-                return A1Notation::left;
+                return Position::left;
             case RIGHT:
-                return A1Notation::right;
+                return Position::right;
             case UP_LEFT:
-                return A1Notation::upLeft;
+                return Position::upLeft;
             case UP_RIGHT:
-                return A1Notation::upRight;
+                return Position::upRight;
             case DOWN_LEFT:
-                return A1Notation::downLeft;
+                return Position::downLeft;
             case DOWN_RIGHT:
-                return A1Notation::downRight;
+                return Position::downRight;
             case SELF:
                 return UnaryOperator.identity();
             default:
@@ -41,7 +41,7 @@ public class DirectionUtil {
         }
     }
 
-    public static Direction findDirection(A1Notation from, A1Notation to) {
+    public static Direction findDirection(Position from, Position to) {
         int horizon = from.getHorizontalIndex() - to.getHorizontalIndex();
         int vertice = from.getVerticalIndex() - to.getVerticalIndex();
         if (horizon == 0 && vertice == 0) return SELF;
@@ -63,15 +63,15 @@ public class DirectionUtil {
         return NULL;
     }
 
-    public static int findMagnitudeSquare(A1Notation from, A1Notation to) {
+    public static int findMagnitudeSquare(Position from, Position to) {
         int vertice = from.getVerticalIndex() - to.getVerticalIndex();
         int horizon = from.getHorizontalIndex() - to.getHorizontalIndex();
         return vertice * vertice + horizon * horizon;
     }
 
-    public static Set<A1Notation> allPositionsInDirection(A1Notation from, UnaryOperator<A1Notation> director) {
-        A1Notation current = director.apply(from);
-        Set<A1Notation> result = new HashSet<>();
+    public static Set<Position> allPositionsInDirection(Position from, UnaryOperator<Position> director) {
+        Position current = director.apply(from);
+        Set<Position> result = new HashSet<>();
         while (current != null) {
             result.add(current);
             current = director.apply(current);
@@ -79,16 +79,16 @@ public class DirectionUtil {
         return result;
     }
 
-    public static List<UnaryOperator<A1Notation>> getAllDirections() {
+    public static List<UnaryOperator<Position>> getAllDirections() {
         return Arrays.asList(
-                A1Notation::upLeft,
-                A1Notation::up,
-                A1Notation::upRight,
-                A1Notation::right,
-                A1Notation::downRight,
-                A1Notation::down,
-                A1Notation::downLeft,
-                A1Notation::left
+                Position::upLeft,
+                Position::up,
+                Position::upRight,
+                Position::right,
+                Position::downRight,
+                Position::down,
+                Position::downLeft,
+                Position::left
         );
     }
 }

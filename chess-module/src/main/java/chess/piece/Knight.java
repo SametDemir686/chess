@@ -1,8 +1,8 @@
 package chess.piece;
 
 import chess.board.Board;
-import chess.match.A1Notation;
 import chess.match.Direction;
+import chess.notations.Position;
 
 import java.util.Objects;
 import java.util.Set;
@@ -27,7 +27,7 @@ public abstract class Knight extends AbstractPiece {
     }
 
     @Override
-    public boolean canMoveTo(A1Notation newPosition) {
+    public boolean canMoveTo(Position newPosition) {
         if (!super.canMoveTo(newPosition)) return false;
         return threatens(newPosition);
     }
@@ -38,7 +38,7 @@ public abstract class Knight extends AbstractPiece {
     }
 
     @Override
-    public boolean threatens(A1Notation position) {
+    public boolean threatens(Position position) {
         int verDiff = abs(this.position.getVerticalIndex() - position.getVerticalIndex());
         int horDiff = abs(this.position.getHorizontalIndex() - position.getHorizontalIndex());
         return horDiff == 2 && verDiff == 1
@@ -46,22 +46,22 @@ public abstract class Knight extends AbstractPiece {
     }
 
     @Override
-    public Set<A1Notation> getAllPossibleSquares() {
+    public Set<Position> getAllPossibleSquares() {
         return getAllPossibleDirections()
                 .map(s -> s.apply(position))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
     }
 
-    private Stream<UnaryOperator<A1Notation>> getAllPossibleDirections() {
+    private Stream<UnaryOperator<Position>> getAllPossibleDirections() {
         return Stream.of(
-                A1Notation::upUpRight,
-                A1Notation::upRightRight,
-                A1Notation::upUpLeft,
-                A1Notation::upLeftLeft,
-                A1Notation::downDownRight,
-                A1Notation::downRightRight,
-                A1Notation::downDownLeft,
-                A1Notation::downLeftLeft);
+                Position::upUpRight,
+                Position::upRightRight,
+                Position::upUpLeft,
+                Position::upLeftLeft,
+                Position::downDownRight,
+                Position::downRightRight,
+                Position::downDownLeft,
+                Position::downLeftLeft);
     }
 }

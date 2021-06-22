@@ -1,8 +1,8 @@
 package chess.piece;
 
 import chess.board.Board;
-import chess.match.A1Notation;
 import chess.match.Direction;
+import chess.notations.Position;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +22,7 @@ public class NullPiece extends AbstractPiece {
     }
 
     @Override
-    public boolean canMoveTo(A1Notation newPosition) {
+    public boolean canMoveTo(Position newPosition) {
         return false;
     }
 
@@ -42,7 +42,7 @@ public class NullPiece extends AbstractPiece {
     }
 
     @Override
-    public boolean threatens(A1Notation position) {
+    public boolean threatens(Position position) {
         return false;
     }
 
@@ -57,7 +57,7 @@ public class NullPiece extends AbstractPiece {
     }
 
     @Override
-    public Set<A1Notation> getAllPossibleSquares() {
+    public Set<Position> getAllPossibleSquares() {
         return new HashSet<>();
     }
 }

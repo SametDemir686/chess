@@ -1,8 +1,8 @@
 package chess.piece;
 
 import chess.board.Board;
-import chess.match.A1Notation;
 import chess.match.Direction;
+import chess.notations.Position;
 import chess.util.DirectionUtil;
 import chess.util.Sets;
 
@@ -24,13 +24,13 @@ public abstract class Bishop extends AbstractPiece {
     }
 
     @Override
-    public boolean canMoveTo(A1Notation newPosition) {
+    public boolean canMoveTo(Position newPosition) {
         if (!super.canMoveTo(newPosition)) return false;
         return threatens(newPosition);
     }
 
     @Override
-    public boolean threatens(A1Notation position) {
+    public boolean threatens(Position position) {
         if (!hasALookAt(position)) return false;
         return isDirectionNotBlocked(position);
     }
@@ -43,18 +43,18 @@ public abstract class Bishop extends AbstractPiece {
                 || direction == Direction.DOWN_RIGHT;
     }
 
-    private boolean hasALookAt(A1Notation at) {
+    private boolean hasALookAt(Position at) {
         Direction direction = findDirection(position, at);
         return canTreathen(direction);
     }
 
     @Override
-    public Set<A1Notation> getAllPossibleSquares() {
+    public Set<Position> getAllPossibleSquares() {
         return Sets.union(
-                DirectionUtil.allPositionsInDirection(position, A1Notation::upLeft),
-                DirectionUtil.allPositionsInDirection(position, A1Notation::downLeft),
-                DirectionUtil.allPositionsInDirection(position, A1Notation::upRight),
-                DirectionUtil.allPositionsInDirection(position, A1Notation::downRight)
+                DirectionUtil.allPositionsInDirection(position, Position::upLeft),
+                DirectionUtil.allPositionsInDirection(position, Position::downLeft),
+                DirectionUtil.allPositionsInDirection(position, Position::upRight),
+                DirectionUtil.allPositionsInDirection(position, Position::downRight)
         );
     }
 }

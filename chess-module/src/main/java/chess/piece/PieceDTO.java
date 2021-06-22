@@ -1,6 +1,6 @@
 package chess.piece;
 
-import chess.match.A1Notation;
+import chess.notations.Position;
 
 public class PieceDTO {
 
@@ -8,7 +8,7 @@ public class PieceDTO {
     private boolean white;
     private boolean active;
     private boolean captured;
-    private A1Notation position;
+    private Position position;
     private String htmlCode;
 
     public PieceDTO(Piece piece) {
@@ -36,7 +36,7 @@ public class PieceDTO {
         return captured;
     }
 
-    public A1Notation getPosition() {
+    public Position getPosition() {
         return position;
     }
 

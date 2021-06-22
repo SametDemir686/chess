@@ -1,6 +1,6 @@
 package chess.player;
 
-import chess.match.A1Notation;
+import chess.notations.Position;
 import chess.piece.King;
 import chess.piece.NullPiece;
 import chess.piece.Piece;
@@ -14,19 +14,19 @@ public interface Player<P extends Piece> {
 
     King getKing();
 
-    default A1Notation getKingsPosition() {
+    default Position getKingsPosition() {
         return getKing().getPosition();
     }
 
     boolean isWhite();
 
-    void add(A1Notation position, P piece);
+    void add(Position position, P piece);
 
     boolean remove(P piece);
 
-    Piece getPieceAt(A1Notation position);
+    Piece getPieceAt(Position position);
 
-    default boolean hasPieceAt(A1Notation position) {
+    default boolean hasPieceAt(Position position) {
         return !(getPieceAt(position) instanceof NullPiece);
     }
 

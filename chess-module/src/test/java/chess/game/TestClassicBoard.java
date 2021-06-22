@@ -10,7 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static chess.match.A1Notation.*;
+import static chess.notations.Position.*;
 import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)

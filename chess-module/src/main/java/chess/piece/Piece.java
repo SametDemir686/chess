@@ -1,18 +1,18 @@
 package chess.piece;
 
 import chess.board.Board;
-import chess.match.A1Notation;
 import chess.match.Direction;
+import chess.notations.Position;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public interface Piece {
-    boolean canMoveTo(A1Notation newPosition);
+    boolean canMoveTo(Position newPosition);
 
-    A1Notation getPosition();
+    Position getPosition();
 
-    void setPosition(A1Notation position);
+    void setPosition(Position position);
 
     boolean isBlack();
 
@@ -22,7 +22,7 @@ public interface Piece {
 
     boolean canTreathen(Direction direction);
 
-    boolean threatens(A1Notation position);
+    boolean threatens(Position position);
 
     void captured();
 
@@ -42,19 +42,19 @@ public interface Piece {
 
     Piece copyToBoard(Board board);
 
-    boolean isNotOccupiedByAllyPiece(A1Notation newPosition);
+    boolean isNotOccupiedByAllyPiece(Position newPosition);
 
-    boolean isNotOccupiedByEnemyPiece(A1Notation newPosition);
+    boolean isNotOccupiedByEnemyPiece(Position newPosition);
 
-    boolean isOccupiedByAllyPiece(A1Notation newPosition);
+    boolean isOccupiedByAllyPiece(Position newPosition);
 
-    boolean isOccupiedByEnemyPiece(A1Notation newPosition);
+    boolean isOccupiedByEnemyPiece(Position newPosition);
 
-    default Set<A1Notation> getAllPossibleMoves() {
+    default Set<Position> getAllPossibleMoves() {
         return getAllPossibleSquares().stream().filter(this::canMoveTo).collect(Collectors.toSet());
     }
 
-    Set<A1Notation> getAllPossibleSquares();
+    Set<Position> getAllPossibleSquares();
 
     default boolean canMove() {
         return getAllPossibleSquares().stream().anyMatch(this::canMoveTo);

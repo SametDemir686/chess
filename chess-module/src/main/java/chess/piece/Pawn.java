@@ -1,8 +1,8 @@
 package chess.piece;
 
 import chess.board.Board;
-import chess.match.A1Notation;
 import chess.match.Direction;
+import chess.notations.Position;
 
 import java.util.Objects;
 import java.util.Set;
@@ -27,14 +27,14 @@ public abstract class Pawn extends AbstractPiece implements Promotable {
     }
 
     @Override
-    public boolean threatens(A1Notation position) {
+    public boolean threatens(Position position) {
         Direction direction = findDirection(this.position, position);
         int magnitudeSquare = findMagnitudeSquare(this.position, position);
         return canTreathen(direction) && magnitudeSquare == 2;
     }
 
     @Override
-    public boolean canMoveTo(A1Notation newPosition) {
+    public boolean canMoveTo(Position newPosition) {
         if (!super.canMoveTo(newPosition)) return false;
         Direction direction = findDirection(position, newPosition);
         int magnitudeSquare = findMagnitudeSquare(position, newPosition);
@@ -50,12 +50,12 @@ public abstract class Pawn extends AbstractPiece implements Promotable {
     public abstract boolean canMove(Direction direction);
 
     @Override
-    public Set<A1Notation> getAllPossibleSquares() {
+    public Set<Position> getAllPossibleSquares() {
         return getAllPossibleDirections()
                 .map(s -> s.apply(position))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
     }
 
-    protected abstract Stream<UnaryOperator<A1Notation>> getAllPossibleDirections();
+    protected abstract Stream<UnaryOperator<Position>> getAllPossibleDirections();
 }

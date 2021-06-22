@@ -1,9 +1,9 @@
-package chess.match;
+package chess.notations;
 
-import static chess.match.A1Notation.*;
+import static chess.notations.Position.*;
 
 public enum Perspective {
-    WHITE(new A1Notation[][]{
+    WHITE(new Position[][]{
             {A8, B8, C8, D8, E8, F8, G8, H8},
             {A7, B7, C7, D7, E7, F7, G7, H7},
             {A6, B6, C6, D6, E6, F6, G6, H6},
@@ -13,7 +13,7 @@ public enum Perspective {
             {A2, B2, C2, D2, E2, F2, G2, H2},
             {A1, B1, C1, D1, E1, F1, G1, H1},
     }),
-    BLACK(new A1Notation[][]{
+    BLACK(new Position[][]{
             {H1, G1, F1, E1, D1, C1, B1, A1},
             {H2, G2, F2, E2, D2, C2, B2, A2},
             {H3, G3, F3, E3, D3, C3, B3, A3},
@@ -25,13 +25,13 @@ public enum Perspective {
     });
 
 
-    private A1Notation[][] positions;
+    private Position[][] positions;
 
-    Perspective(A1Notation[][] positions) {
+    Perspective(Position[][] positions) {
         this.positions = positions;
     }
 
-    public A1Notation[][] getPositions() {
+    public Position[][] getPositions() {
         return positions;
     }
 }

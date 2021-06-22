@@ -1,8 +1,8 @@
 package chess.piece;
 
 import chess.board.Board;
-import chess.match.A1Notation;
 import chess.match.Direction;
+import chess.notations.Position;
 
 import java.util.Collection;
 import java.util.Set;
@@ -25,13 +25,13 @@ public abstract class Queen extends AbstractPiece {
     }
 
     @Override
-    public boolean canMoveTo(A1Notation newPosition) {
+    public boolean canMoveTo(Position newPosition) {
         if (!super.canMoveTo(newPosition)) return false;
         return threatens(newPosition);
     }
 
     @Override
-    public boolean threatens(A1Notation position) {
+    public boolean threatens(Position position) {
         if (!hasALookAt(position)) return false;
         return isDirectionNotBlocked(position);
     }
@@ -41,13 +41,13 @@ public abstract class Queen extends AbstractPiece {
         return direction.isValid();
     }
 
-    private boolean hasALookAt(A1Notation to) {
+    private boolean hasALookAt(Position to) {
         Direction direction = findDirection(position, to);
         return canTreathen(direction);
     }
 
     @Override
-    public Set<A1Notation> getAllPossibleSquares() {
+    public Set<Position> getAllPossibleSquares() {
         return getAllDirections().stream()
                 .map(direction -> allPositionsInDirection(position, direction))
                 .flatMap(Collection::stream)

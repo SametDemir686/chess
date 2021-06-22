@@ -1,8 +1,8 @@
-package chess.match;
+package chess.notations;
 
 import java.util.Optional;
 
-public enum A1Notation {
+public enum Position {
     A1('A', '1', 0, 0),
     A2('A', '2', 0, 1),
     A3('A', '3', 0, 2),
@@ -74,32 +74,24 @@ public enum A1Notation {
     private final int verticalIndex;
     private final int horizontalIndex;
 
-    A1Notation(char verticalChar, char horizontalChar, int verticalIndex, int horizontalIndex) {
+    Position(char verticalChar, char horizontalChar, int verticalIndex, int horizontalIndex) {
         this.verticalChar = verticalChar;
         this.horizontalChar = horizontalChar;
         this.verticalIndex = verticalIndex;
         this.horizontalIndex = horizontalIndex;
     }
 
-    public static A1Notation[][] getBoard() {
-        return new A1Notation[][]{
-                new A1Notation[]{A8, B8, C8, D8, E8, F8, G8, H8},
-                new A1Notation[]{A7, B7, C7, D7, E7, F7, G7, H7},
-                new A1Notation[]{A6, B6, C6, D6, E6, F6, G6, H6},
-                new A1Notation[]{A5, B5, C5, D5, E5, F5, G5, H5},
-                new A1Notation[]{A4, B4, C4, D4, E4, F4, G4, H4},
-                new A1Notation[]{A3, B3, C3, D3, E3, F3, G3, H3},
-                new A1Notation[]{A2, B2, C2, D2, E2, F2, G2, H2},
-                new A1Notation[]{A1, B1, C1, D1, E1, F1, G1, H1}
+    public static Position[][] getBoard() {
+        return new Position[][]{
+                new Position[]{A8, B8, C8, D8, E8, F8, G8, H8},
+                new Position[]{A7, B7, C7, D7, E7, F7, G7, H7},
+                new Position[]{A6, B6, C6, D6, E6, F6, G6, H6},
+                new Position[]{A5, B5, C5, D5, E5, F5, G5, H5},
+                new Position[]{A4, B4, C4, D4, E4, F4, G4, H4},
+                new Position[]{A3, B3, C3, D3, E3, F3, G3, H3},
+                new Position[]{A2, B2, C2, D2, E2, F2, G2, H2},
+                new Position[]{A1, B1, C1, D1, E1, F1, G1, H1}
         };
-    }
-
-    public static void main(String[] args) {
-        System.out.println("A1.right() == B1    " + (A1.right() == B1) + "  Returned: " + A1.right());
-        System.out.println("A1.left() == null   " + (A1.left() == null) + " Returned: " + A1.left());
-        System.out.println("A1.up() == A2       " + (A1.up() == A2) + " Returned: " + A1.up());
-        System.out.println("B1.down() == null   " + (B1.down() == null) + " Returned: " + B1.down());
-        System.out.println("B8.right() == C8    " + (B8.right() == C8) + "  Returned: " + B8.right());
     }
 
     public int getVerticalIndex() {
@@ -114,83 +106,83 @@ public enum A1Notation {
         return verticalChar + "" + horizontalChar;
     }
 
-    public A1Notation left() {
+    public Position left() {
         int upVertice = (int) verticalChar - 1;
         if (upVertice < 'A') return null;
         return valueOf((char) upVertice + "" + horizontalChar);
     }
 
-    public A1Notation right() {
+    public Position right() {
         int upVertice = (int) verticalChar + 1;
         if (upVertice > 'H') return null;
         return valueOf((char) upVertice + "" + horizontalChar);
     }
 
-    public A1Notation up() {
+    public Position up() {
         int rightHorizon = (int) horizontalChar + 1;
         if (rightHorizon > '8') return null;
         return valueOf(verticalChar + "" + (char) rightHorizon);
     }
 
-    public A1Notation down() {
+    public Position down() {
         int leftHorizon = (int) horizontalChar - 1;
         if (leftHorizon < '1') return null;
         return valueOf(verticalChar + "" + (char) leftHorizon);
     }
 
-    public A1Notation downRight() {
-        A1Notation down = down();
+    public Position downRight() {
+        Position down = down();
         if (down == null) return null;
         return down.right();
     }
 
-    public A1Notation downLeft() {
-        A1Notation down = down();
+    public Position downLeft() {
+        Position down = down();
         if (down == null) return null;
         return down.left();
     }
 
-    public A1Notation upRight() {
-        A1Notation up = up();
+    public Position upRight() {
+        Position up = up();
         if (up == null) return null;
         return up.right();
     }
 
-    public A1Notation upLeft() {
-        A1Notation up = up();
+    public Position upLeft() {
+        Position up = up();
         if (up == null) return null;
         return up.left();
     }
 
-    public A1Notation upUpRight() {
-        return Optional.of(this).map(A1Notation::upRight).map(A1Notation::up).orElse(null);
+    public Position upUpRight() {
+        return Optional.of(this).map(Position::upRight).map(Position::up).orElse(null);
     }
 
-    public A1Notation upRightRight() {
-        return Optional.of(this).map(A1Notation::upRight).map(A1Notation::right).orElse(null);
+    public Position upRightRight() {
+        return Optional.of(this).map(Position::upRight).map(Position::right).orElse(null);
     }
 
-    public A1Notation upUpLeft() {
-        return Optional.of(this).map(A1Notation::upLeft).map(A1Notation::up).orElse(null);
+    public Position upUpLeft() {
+        return Optional.of(this).map(Position::upLeft).map(Position::up).orElse(null);
     }
 
-    public A1Notation upLeftLeft() {
-        return Optional.of(this).map(A1Notation::upLeft).map(A1Notation::left).orElse(null);
+    public Position upLeftLeft() {
+        return Optional.of(this).map(Position::upLeft).map(Position::left).orElse(null);
     }
 
-    public A1Notation downDownRight() {
-        return Optional.of(this).map(A1Notation::downRight).map(A1Notation::down).orElse(null);
+    public Position downDownRight() {
+        return Optional.of(this).map(Position::downRight).map(Position::down).orElse(null);
     }
 
-    public A1Notation downRightRight() {
-        return Optional.of(this).map(A1Notation::downRight).map(A1Notation::right).orElse(null);
+    public Position downRightRight() {
+        return Optional.of(this).map(Position::downRight).map(Position::right).orElse(null);
     }
 
-    public A1Notation downDownLeft() {
-        return Optional.of(this).map(A1Notation::downLeft).map(A1Notation::down).orElse(null);
+    public Position downDownLeft() {
+        return Optional.of(this).map(Position::downLeft).map(Position::down).orElse(null);
     }
 
-    public A1Notation downLeftLeft() {
-        return Optional.of(this).map(A1Notation::downLeft).map(A1Notation::left).orElse(null);
+    public Position downLeftLeft() {
+        return Optional.of(this).map(Position::downLeft).map(Position::left).orElse(null);
     }
 }

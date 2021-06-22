@@ -1,5 +1,7 @@
 package chess.match;
 
+import chess.notations.Perspective;
+import chess.notations.Position;
 import chess.piece.PieceDTO;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +19,7 @@ public class MatchController {
 
     @CrossOrigin
     @PostMapping("/move")
-    public boolean move(A1Notation from, A1Notation to) {
+    public boolean move(Position from, Position to) {
         return match.move(from, to);
     }
 

@@ -1,6 +1,6 @@
 package chess.player;
 
-import chess.match.A1Notation;
+import chess.notations.Position;
 import chess.piece.King;
 import chess.piece.NullPiece;
 import chess.piece.Piece;
@@ -18,7 +18,7 @@ public abstract class AbstractPlayer<P extends Piece, K extends King> implements
     }
 
     @Override
-    public void add(A1Notation position, P piece) {
+    public void add(Position position, P piece) {
         if (piece instanceof King) {
             setKing((K) piece);
         }
@@ -31,7 +31,7 @@ public abstract class AbstractPlayer<P extends Piece, K extends King> implements
     }
 
     @Override
-    public Piece getPieceAt(A1Notation position) {
+    public Piece getPieceAt(Position position) {
         return pieces.stream()
                 .filter(s -> s.getPosition() == position)
                 .findAny()

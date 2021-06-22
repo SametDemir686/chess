@@ -1,8 +1,8 @@
 package chess.piece;
 
 import chess.board.Board;
-import chess.match.A1Notation;
 import chess.match.Direction;
+import chess.notations.Position;
 
 import java.util.Objects;
 import java.util.Set;
@@ -25,12 +25,12 @@ public abstract class King extends AbstractPiece {
         super(king, board);
     }
 
-    protected King(A1Notation position, Board board) {
+    protected King(Position position, Board board) {
         super(position);
     }
 
     @Override
-    public boolean canMoveTo(A1Notation newPosition) {
+    public boolean canMoveTo(Position newPosition) {
         return super.canMoveTo(newPosition)
                 && hasALookAt(newPosition)
                 && !isTreathenedByEnemyPiece(newPosition);
@@ -42,18 +42,18 @@ public abstract class King extends AbstractPiece {
     }
 
     @Override
-    public boolean threatens(A1Notation position) {
+    public boolean threatens(Position position) {
         return hasALookAt(position);
     }
 
-    private boolean hasALookAt(A1Notation otherPosition) {
+    private boolean hasALookAt(Position otherPosition) {
         int horDiff = abs(otherPosition.getHorizontalIndex() - position.getHorizontalIndex());
         int verDiff = abs(otherPosition.getVerticalIndex() - position.getVerticalIndex());
         return horDiff <= 1 && verDiff <= 1;
     }
 
     @Override
-    public Set<A1Notation> getAllPossibleSquares() {
+    public Set<Position> getAllPossibleSquares() {
         return getAllDirections()
                 .stream()
                 .map(s -> s.apply(position))

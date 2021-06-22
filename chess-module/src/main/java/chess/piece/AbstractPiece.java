@@ -1,8 +1,8 @@
 package chess.piece;
 
 import chess.board.Board;
-import chess.match.A1Notation;
 import chess.match.Direction;
+import chess.notations.Position;
 
 import java.util.function.UnaryOperator;
 
@@ -11,7 +11,7 @@ import static chess.util.DirectionUtil.parseToUnaryOperator;
 
 public abstract class AbstractPiece implements Piece {
     protected Board board;
-    protected A1Notation position;
+    protected Position position;
     protected boolean active = true;
     protected boolean moved = false;
 
@@ -29,23 +29,23 @@ public abstract class AbstractPiece implements Piece {
         this.board = board;
     }
 
-    protected AbstractPiece(A1Notation position) {
+    protected AbstractPiece(Position position) {
         this();
         this.position = position;
     }
 
     @Override
-    public A1Notation getPosition() {
+    public Position getPosition() {
         return position;
     }
 
     @Override
-    public void setPosition(A1Notation position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 
     @Override
-    public boolean canMoveTo(A1Notation newPosition) {
+    public boolean canMoveTo(Position newPosition) {
         return isNotOccupiedByAllyPiece(newPosition)
                 && !board.willThereBeCheckIfMoves(this.position, newPosition);
     }
@@ -75,45 +75,45 @@ public abstract class AbstractPiece implements Piece {
     }
 
     @Override
-    public boolean isNotOccupiedByAllyPiece(A1Notation newPosition) {
+    public boolean isNotOccupiedByAllyPiece(Position newPosition) {
         return !isOccupiedByAllyPiece(newPosition);
     }
 
     @Override
-    public boolean isNotOccupiedByEnemyPiece(A1Notation newPosition) {
+    public boolean isNotOccupiedByEnemyPiece(Position newPosition) {
         return !isOccupiedByEnemyPiece(newPosition);
     }
 
     @Override
-    public boolean isOccupiedByAllyPiece(A1Notation newPosition) {
+    public boolean isOccupiedByAllyPiece(Position newPosition) {
         return !board.isEmpty(newPosition)
                 && isWhite() == board.getPieceAt(newPosition).isWhite();
     }
 
     @Override
-    public boolean isOccupiedByEnemyPiece(A1Notation newPosition) {
+    public boolean isOccupiedByEnemyPiece(Position newPosition) {
         return !board.isEmpty(newPosition)
                 && isWhite() != board.getPieceAt(newPosition).isWhite();
     }
 
-    public boolean isTreathenedByEnemyPiece(A1Notation newPosition) {
+    public boolean isTreathenedByEnemyPiece(Position newPosition) {
         if (isWhite()) return board.isThreatenedByBlack(newPosition);
         return board.isThreatenedByWhite(newPosition);
     }
 
-    public boolean isDirectionNotBlocked(A1Notation position) {
+    public boolean isDirectionNotBlocked(Position position) {
         Direction direction = findDirection(this.position, position);
-        UnaryOperator<A1Notation> director = parseToUnaryOperator(direction);
+        UnaryOperator<Position> director = parseToUnaryOperator(direction);
         return direction.isValid()
                 && isDirectionNotBlocked(position, director);
     }
 
-    private boolean isDirectionNotBlocked(A1Notation position, UnaryOperator<A1Notation> direction) {
+    private boolean isDirectionNotBlocked(Position position, UnaryOperator<Position> direction) {
         return findFirstBlockingSquare(position, direction) == position;
     }
 
-    private A1Notation findFirstBlockingSquare(A1Notation newPosition, UnaryOperator<A1Notation> direction) {
-        A1Notation current = direction.apply(position);
+    private Position findFirstBlockingSquare(Position newPosition, UnaryOperator<Position> direction) {
+        Position current = direction.apply(position);
         while (current != null && current != newPosition && board.isEmpty(current)) {
             current = direction.apply(current);
         }
