@@ -58,4 +58,6 @@ public abstract class Pawn extends AbstractPiece implements Promotable {
     }
 
     protected abstract Stream<UnaryOperator<Position>> getAllPossibleDirections();
+
+    public abstract boolean isPromotion(Position moveTo);
 }

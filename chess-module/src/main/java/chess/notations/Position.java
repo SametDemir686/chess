@@ -189,4 +189,12 @@ public enum Position {
     public Position downLeftLeft() {
         return Optional.of(this).map(Position::downLeft).map(Position::left).orElse(null);
     }
+
+    public boolean isEighthRank() {
+        return horizontalChar == '8';
+    }
+
+    public boolean isFirstRank() {
+        return horizontalChar == '1';
+    }
 }

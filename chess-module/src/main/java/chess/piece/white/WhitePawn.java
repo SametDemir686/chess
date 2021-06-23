@@ -52,4 +52,35 @@ public class WhitePawn extends Pawn implements WhitePiece {
     public Stream<UnaryOperator<Position>> getAllPossibleDirections() {
         return Stream.of(Position::upLeft, Position::up, Position::upRight);
     }
+
+    @Override
+    public boolean isPromotion(Position moveTo) {
+        return moveTo.isEighthRank();
+    }
+
+    @Override
+    public WhiteQueen promoteToQueen() {
+        return promoteTo(new WhiteQueen());
+    }
+
+    @Override
+    public WhiteRook promoteToRook() {
+        return promoteTo(new WhiteRook());
+    }
+
+    @Override
+    public WhiteBishop promoteToBishop() {
+        return promoteTo(new WhiteBishop());
+    }
+
+    @Override
+    public WhiteKnight promoteToKnight() {
+        return promoteTo(new WhiteKnight());
+    }
+
+    private <T extends WhitePiece> T promoteTo(T piece) {
+        piece.setBoard(board);
+        piece.setPosition(position);
+        return piece;
+    }
 }

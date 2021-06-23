@@ -1,6 +1,8 @@
 package chess.player;
 
+import chess.move.Move;
 import chess.notations.Position;
+import chess.notations.PromotionType;
 import chess.piece.*;
 
 import java.util.List;
@@ -47,4 +49,8 @@ public interface Player<P extends Piece> {
     void castleLong();
 
     void castleShort();
+
+    boolean threathens(Position position);
+
+    Move promote(Position promotingPosition, PromotionType promotionType);
 }

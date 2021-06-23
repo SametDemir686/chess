@@ -58,6 +58,11 @@ public abstract class AbstractPiece implements Piece {
         return moved;
     }
 
+    @Override
+    public Board getBoard() {
+        return board;
+    }
+
     public Move move(Position to) {
         this.moved = true;
         this.position = to;

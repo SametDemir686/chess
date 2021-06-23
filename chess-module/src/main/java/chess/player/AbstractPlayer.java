@@ -122,6 +122,11 @@ public abstract class AbstractPlayer<P extends Piece, K extends King> implements
     }
 
     @Override
+    public boolean threathens(Position position) {
+        return getAllActivePieces().stream().anyMatch(piece -> piece.threatens(position));
+    }
+
+    @Override
     public List<Pawn> getPawns() {
         return pawns;
     }

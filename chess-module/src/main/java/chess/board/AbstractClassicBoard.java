@@ -4,8 +4,10 @@ import chess.move.InvalidMove;
 import chess.move.Move;
 import chess.notations.Perspective;
 import chess.notations.Position;
+import chess.notations.PromotionType;
 import chess.piece.King;
 import chess.piece.NullPiece;
+import chess.piece.Pawn;
 import chess.piece.Piece;
 import chess.piece.black.*;
 import chess.piece.white.*;
@@ -14,6 +16,7 @@ import chess.player.Player;
 import chess.player.WhitePlayer;
 
 import static chess.notations.Position.*;
+import static chess.notations.PromotionType.QUEEN;
 
 public abstract class AbstractClassicBoard implements Board {
     public static final int BOARD_SIZE = 8;
@@ -78,9 +81,24 @@ public abstract class AbstractClassicBoard implements Board {
             whitesTurn = !whitesTurn;
             if (isLongCastling(piecePosition, moveTo)) return castleLong(piecePosition);
             if (isShortCastling(piecePosition, moveTo)) return castleShort(piecePosition);
+            if (isPromoting(piecePosition, moveTo))
+                return promote(piecePosition, moveTo, QUEEN); // TODO kullanıcıdan alınacak
             return movePiece(piecePosition, moveTo);
         }
         return null;
+    }
+
+    private Move promote(Position piecePosition, Position moveTo, PromotionType promotionType) {
+        movePiece(piecePosition, moveTo);
+        return getPlayerByPiecePosition(moveTo)
+                .promote(moveTo, promotionType);
+    }
+
+    private Player<?> getPlayerByPiecePosition(Position piecePosition) {
+        Piece piece = getPieceAt(piecePosition);
+        if (piece.isWhite()) return whitePlayer;
+        if (piece.isBlack()) return blackPlayer;
+        throw new IllegalArgumentException("No piece found at " + piecePosition);
     }
 
     private Move castleShort(Position piecePosition) {
@@ -107,6 +125,13 @@ public abstract class AbstractClassicBoard implements Board {
         if (!(piece instanceof King)) return false;
         King king = (King) piece;
         return king.isShortCastling(moveTo) && king.canShortCastle();
+    }
+
+    private boolean isPromoting(Position piecePosition, Position moveTo) {
+        Piece piece = getPieceAt(piecePosition);
+        if (!(piece instanceof Pawn)) return false;
+        Pawn pawn = (Pawn) piece;
+        return pawn.isPromotion(moveTo);
     }
 
     public void removeAllPieces() {
@@ -161,25 +186,23 @@ public abstract class AbstractClassicBoard implements Board {
     }
 
     public boolean isThreatenedByBlack(Position position) {
-        return blackPlayer.getAllActivePieces().stream().anyMatch(piece -> piece.threatens(position));
+        return blackPlayer.threathens(position);
     }
 
     public boolean isThreatenedByWhite(Position position) {
-        return whitePlayer.getAllActivePieces().stream().anyMatch(piece -> piece.threatens(position));
+        return whitePlayer.threathens(position);
     }
 
     @Override
     public boolean isWhiteChecked() {
         Position whitesKingPosition = getWhitesKingPosition();
-        return blackPlayer.getAllActivePieces().stream()
-                .anyMatch(piece -> piece.threatens(whitesKingPosition));
+        return isThreatenedByBlack(whitesKingPosition);
     }
 
     @Override
     public boolean isBlackedChecked() {
         Position blacksKingPosition = getBlacksKingPosition();
-        return whitePlayer.getAllActivePieces().stream()
-                .anyMatch(piece -> piece.threatens(blacksKingPosition));
+        return isThreatenedByWhite(blacksKingPosition);
     }
 
     @Override

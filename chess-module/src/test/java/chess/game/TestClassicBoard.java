@@ -3,6 +3,8 @@ package chess.game;
 import chess.board.Board;
 import chess.board.ClassicBoard;
 import chess.board.FreeBoard;
+import chess.piece.black.BlackQueen;
+import chess.piece.white.WhiteQueen;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -24,6 +26,43 @@ public class TestClassicBoard {
         board.move(G2, G4);
         board.move(D8, H4);
         assertTrue(board.isCheckMate());
+    }
+
+    @Test
+    public void promote_to_queen() {
+        Board board = new ClassicBoard();
+        board.move(A2, A4);
+        board.move(C7, C6);
+
+        board.move(A4, A5);
+        board.move(C6, C5);
+
+        board.move(A5, A6);
+        board.move(C5, C4);
+
+        board.move(A6, B7);
+        board.move(C4, C3);
+
+        board.move(B7, C8);
+        assertTrue(board.getPieceAt(C8) instanceof WhiteQueen);
+    }
+
+    @Test
+    public void promote_to_queen_2() {
+        Board board = new ClassicBoard();
+        board.move(E2, E4);
+        board.move(D7, D5);
+        board.move(E4, E5);
+        board.move(C7, C5);
+        board.move(D2, D4);
+        board.move(C5, D4);
+        board.move(C2, C3);
+        board.move(D4, D3);
+        board.move(C3, C4);
+        board.move(D3, D2);
+        board.move(E1, E2);
+        board.move(D2, C1);
+        assertTrue(board.getPieceAt(C1) instanceof BlackQueen);
     }
 
     @Test
